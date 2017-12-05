@@ -17,33 +17,12 @@ export default ($locationProvider, $stateProvider) => {
                 dependencies: loadDependencies('core'),
             },
         })
-        .state('app.about', {
-            component: 'about',
-            resolve: {
-                dependencies: loadDependencies('about'),
-            },
-            url: '/',
-        })
-        .state('app.language-features', {
-            component: 'languageFeatures',
-            resolve: {
-                dependencies: loadDependencies('language-features'),
-            },
-            url: '/language-features',
-        })
-        .state('app.todo', {
-            component: 'todoList',
-            resolve: {
-                dependencies: loadDependencies('todo'),
-            },
-            url: '/todo',
-        })
 		.state('app.characters', {
             component: 'characters',
             resolve: {
                 dependencies: loadDependencies('bonuses'),
             },
-            url: '/characters',
+            url: '/',
         })
         .state('otherwise', {
             url: '*path',
