@@ -1,0 +1,50 @@
+<p>Base Attack: + {{$ctrl.getBaseAttackRange()}}</p>
+
+<div ng-show="$ctrl.bigUps && $ctrl.bigUps.length > 1" ng-repeat="bigUp in $ctrl.bigUps track by $index">
+  <input type="radio" name="bigUp" ng-model="$ctrl.selectedBigUp" ng-value="bigUp">{{bigUp.name}}<br>
+</div>
+
+<br />
+
+<div ng-repeat="attack in $ctrl.attacks track by $index">
+  <input type="radio" name="attack" ng-model="$ctrl.selectedAttack" ng-value="attack">{{attack.name}} {{$ctrl.getAttack(attack)}}<br>
+</div>
+
+<br />
+
+<div ng-repeat="option in $ctrl.optionalBonuses track by $index">
+  <div ng-show="!option.type || option.type === $ctrl.selectedAttack.type">
+    <input type="checkbox" ng-model="option.selected">{{option.name}}: {{$ctrl.getBonus(option)}}</input>
+  </div>
+</div>
+
+<br />
+
+<div ng-repeat="bonus in $ctrl.conditionalBonuses track by $index">
+  <div ng-show="!bonus.type || bonus.type === $ctrl.selectedAttack.type">
+    <input type="checkbox" ng-model="bonus.selected">{{bonus.condition}}: {{$ctrl.getBonus(bonus)}}</input>
+  </div>
+</div>
+
+<br />
+
+Misc Attack Mod: <input type="number" ng-model="$ctrl.miscBonus.attackMod"/>
+<br />
+Misc Damage Mod: <input type="number" ng-model="$ctrl.miscBonus.damageMod"/>
+<br />
+Misc Damage Dice: <input type="text" ng-model="$ctrl.miscBonus.damageDice"/>
+<br />
+
+<br />
+<br />
+
+<div ng-repeat="baseAttack in $ctrl.getBaseAttackRange() track by $index">
+  <span>{{$ctrl.getFinalAttack(baseAttack)}}</span>
+  <br />
+  <span>{{$ctrl.getFinalDamage()}}</span>
+  <br />
+  <br />
+</div>
+
+
+
