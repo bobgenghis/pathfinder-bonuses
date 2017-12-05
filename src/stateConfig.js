@@ -38,12 +38,12 @@ export default ($locationProvider, $stateProvider) => {
             },
             url: '/todo',
         })
-		.state('app.bonuses', {
-            component: 'bonusesList',
+		.state('app.characters', {
+            component: 'characters',
             resolve: {
                 dependencies: loadDependencies('bonuses'),
             },
-            url: '/bonuses',
+            url: '/characters',
         })
         .state('otherwise', {
             url: '*path',
