@@ -14,21 +14,9 @@
 
 <br />
 
-<div ng-repeat="option in $ctrl.optionalBonuses track by $index">
-  <div ng-show="!option.type || option.type === $ctrl.selectedAttack.type">
-    <input type="checkbox" ng-model="option.selected">{{option.name}}: {{$ctrl.getBonus(option)}}</input>
-  </div>
-</div>
+<bonus-list bonuses="$ctrl.optionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" ></bonus-list>
 
-<br />
-
-<div ng-repeat="bonus in $ctrl.conditionalBonuses track by $index">
-  <div ng-show="!bonus.type || bonus.type === $ctrl.selectedAttack.type">
-    <input type="checkbox" ng-model="bonus.selected">{{bonus.condition}}: {{$ctrl.getBonus(bonus)}}</input>
-  </div>
-</div>
-
-<br />
+<bonus-list bonuses="$ctrl.conditionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" ></bonus-list>
 
 Misc Attack Mod: <input type="number" ng-model="$ctrl.miscBonus.attackMod"/>
 <br />
