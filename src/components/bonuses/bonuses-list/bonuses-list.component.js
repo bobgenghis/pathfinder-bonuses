@@ -3,11 +3,12 @@ import template from './bonuses-list.html';
 
 export default {
   bindings: {
-	baseAttack: '<',
+    name: '<',
+    baseAttack: '<',
     attacks: '<',
     bigUps: '<',
     optionalBonuses: '<',
-	conditionalBonuses: '<'
+    conditionalBonuses: '<'
   },
   controller,
   name: 'bonusesList',

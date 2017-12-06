@@ -1,8 +1,10 @@
-<bonuses-list 
-  base-attack="$ctrl.boendal.baseAttack"
-  attacks="$ctrl.boendal.attacks"
-  big-ups="$ctrl.boendal.bigUps"
-  optional-bonuses="$ctrl.boendal.optionalBonuses"
-  conditional-bonuses="$ctrl.boendal.conditionalBonuses"
+<div ng-repeat="character in $ctrl.characters track by $index">
+  <bonuses-list
+  name="character.name"
+  base-attack="character.baseAttack"
+  attacks="character.attacks"
+  big-ups="character.bigUps"
+  optional-bonuses="character.optionalBonuses"
+  conditional-bonuses="character.conditionalBonuses"
   />
-<br>
+</div>

@@ -4,10 +4,11 @@ export default class controller {
     
     Object.assign(this, { $log });
     
+    this.name; //binding
     this.baseAttack; // binding
     this.attacks = []; //binding
-	this.bigUps = []; //binding
-	this.optionalBonuses = []; //binding
+    this.bigUps = []; //binding
+    this.optionalBonuses = []; //binding
     this.conditionalBonuses = []; //binding
 
     this.miscBonus = { attackMod: 0, damageMod: 0,  damageDice: ''};
@@ -131,7 +132,15 @@ export default class controller {
     
     var damageMod = this.miscBonus.damageMod;
     var selectedAttack = this.selectedAttack;
-    
+	
+    var damageDice = this.selectedBigUp.large
+      ? selectedAttack.largeDamageDice
+      : selectedAttack.damageDice;
+	  
+    if (!damageDice || damageDice === '') {
+	  return '';
+	}
+
     angular.forEach(this.optionalBonuses, function(option, index) {
       if (option.selected) {
         if (option.damageMod && (!option.type || option.type === selectedAttack.type)) {
@@ -139,7 +148,7 @@ export default class controller {
         }
       }
     });
-    
+
     angular.forEach(this.conditionalBonuses, function(bonus, index) {
       if (bonus.selected) {
         if (bonus.damageMod && (!bonus.type || bonus.type === selectedAttack.type)) {
@@ -147,11 +156,7 @@ export default class controller {
         }
       }
     });
-      
-    var damageDice = this.selectedBigUp.large
-      ? selectedAttack.largeDamageDice
-      : selectedAttack.damageDice;
-      
+
     var miscDamageDice = this.miscBonus.damageDice && this.miscBonus.damageDice.length > 0
       ? ('+' + this.miscBonus.damageDice)
       : '';

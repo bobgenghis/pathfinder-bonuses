@@ -1,3 +1,5 @@
+<h1>{{$ctrl.name}}</h1>
+
 <p>Base Attack: + {{$ctrl.getBaseAttackRange()}}</p>
 
 <div ng-show="$ctrl.bigUps && $ctrl.bigUps.length > 1" ng-repeat="bigUp in $ctrl.bigUps track by $index">
