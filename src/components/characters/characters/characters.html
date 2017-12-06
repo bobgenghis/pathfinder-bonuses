@@ -1,10 +1,8 @@
-<div ng-repeat="character in $ctrl.characters track by $index">
-  <character
-    name="character.name"
-    base-attack="character.baseAttack"
-    attacks="character.attacks"
-    big-ups="character.bigUps"
-    optional-bonuses="character.optionalBonuses"
-    conditional-bonuses="character.conditionalBonuses"
-  />
-</div>
+<character ng-repeat="character in $ctrl.characters track by $index"
+  name="character.name"
+  base-attack="character.baseAttack"
+  attacks="character.attacks"
+  big-ups="character.bigUps"
+  optional-bonuses="character.optionalBonuses"
+  conditional-bonuses="character.conditionalBonuses"
+/>
