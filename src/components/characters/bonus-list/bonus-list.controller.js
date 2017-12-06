@@ -7,11 +7,6 @@ export default class controller {
     this.selectedAttackType; //binding
     this.bonuses = []; //binding
   }
-  
-  $onInit() {
-	this.$log.info(this.selectedAttackType);
-	this.$log.info(this.bonuses);
-  }
 
   getBonus(bonus) {
     var attackMod = (bonus && bonus.attackMod)
