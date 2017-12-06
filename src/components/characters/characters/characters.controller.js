@@ -41,7 +41,7 @@ export default class controller {
 
         attacks: [
           { name: 'bite', type: 'melee', attackMod: 7, damageDice: '2d6', damageMod: 14},
-          { name: 'trip', type: 'melee', attackMod: 13, damageDice: '', damageMod: 0}
+          { name: 'trip', type: 'melee', attackMod: 15, damageDice: '', damageMod: 0}
         ],
 
         bigUps: [
