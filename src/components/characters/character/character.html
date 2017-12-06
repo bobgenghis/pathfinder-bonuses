@@ -3,13 +3,13 @@
 <p>Base Attack: + {{$ctrl.getBaseAttackRange()}}</p>
 
 <div ng-show="$ctrl.bigUps && $ctrl.bigUps.length > 1" ng-repeat="bigUp in $ctrl.bigUps track by $index">
-  <input type="radio" name="bigUp" ng-model="$ctrl.selectedBigUp" ng-value="bigUp">{{bigUp.name}}<br>
+  <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp">{{bigUp.name}}<br>
 </div>
 
 <br />
 
 <div ng-repeat="attack in $ctrl.attacks track by $index">
-  <input type="radio" name="attack" ng-model="$ctrl.selectedAttack" ng-value="attack">{{attack.name}} {{$ctrl.getAttack(attack)}}<br>
+  <input type="radio" ng-model="$ctrl.selectedAttack" ng-value="attack">{{attack.name}} {{$ctrl.getAttack(attack)}}<br>
 </div>
 
 <br />

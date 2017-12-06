@@ -11,6 +11,9 @@ export default class controller {
     this.optionalBonuses = []; //binding
     this.conditionalBonuses = []; //binding
 
+    this.selectedAttack = {};
+    this.selectedBigUp = {};
+
     this.miscBonus = { attackMod: 0, damageMod: 0,  damageDice: ''};
   }
   
