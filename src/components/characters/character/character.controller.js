@@ -73,18 +73,6 @@ export default class controller {
     return this.getAmount(baseAttack + attack.attackMod) + ' / ' + attack.damageDice + this.getAmount(attack.damageMod);
   }
   
-  getBonus(bonus) {
-    var attackMod = (bonus && bonus.attackMod)
-      ? this.getAmount(bonus.attackMod) + ' attack '
-      : '';
-    
-    var damageMod = (bonus && bonus.damageMod)
-      ? this.getAmount(bonus.damageMod) + ' damage '
-      : '';
-    
-    return attackMod + damageMod;
-  }
-  
   getAmount(amount) {
     if (angular.isDefined(amount)) {
       if (amount > 0) {
