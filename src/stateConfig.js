@@ -20,7 +20,7 @@ export default ($locationProvider, $stateProvider) => {
 		.state('app.characters', {
             component: 'characters',
             resolve: {
-                dependencies: loadDependencies('bonuses'),
+                dependencies: loadDependencies('characters'),
             },
             url: '/',
         })

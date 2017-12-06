@@ -1,5 +1,5 @@
-import controller from './bonuses-list.controller';
-import template from './bonuses-list.html';
+import controller from './character.controller';
+import template from './character.html';
 
 export default {
   bindings: {
@@ -11,6 +11,6 @@ export default {
     conditionalBonuses: '<'
   },
   controller,
-  name: 'bonusesList',
+  name: 'character',
   template,
 };
