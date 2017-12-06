@@ -2,4 +2,16 @@ character {
   width: 350px;
   display: inline-block;
   vertical-align: top;
+
+  .bigUpsWrapper {
+	min-height: 80px;
+  }
+
+  .optionalWrapper {
+	min-height: 60px;
+  }
+
+  .conditionalWrapper {
+	min-height: 120px;
+  }
 }

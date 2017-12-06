@@ -2,10 +2,11 @@
 
 <p>Base Attack: + {{$ctrl.getBaseAttackRange()}}</p>
 
-<div ng-show="$ctrl.bigUps && $ctrl.bigUps.length > 1" ng-repeat="bigUp in $ctrl.bigUps track by $index">
-  <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp">{{bigUp.name}}<br>
+<div class="bigUpsWrapper" ng-show="$ctrl.bigUps && $ctrl.bigUps.length > 1">
+  <div ng-repeat="bigUp in $ctrl.bigUps track by $index">
+    <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp">{{bigUp.name}}<br>
+  </div>
 </div>
-
 <br />
 
 <div ng-repeat="attack in $ctrl.attacks track by $index">
@@ -14,9 +15,9 @@
 
 <br />
 
-<bonus-list bonuses="$ctrl.optionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" ></bonus-list>
+<bonus-list class="optionalWrapper" bonuses="$ctrl.optionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" ></bonus-list>
 
-<bonus-list bonuses="$ctrl.conditionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" ></bonus-list>
+<bonus-list class="conditionalWrapper" bonuses="$ctrl.conditionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" ></bonus-list>
 
 Misc Attack Mod: <input type="number" ng-model="$ctrl.miscBonus.attackMod"/>
 <br />

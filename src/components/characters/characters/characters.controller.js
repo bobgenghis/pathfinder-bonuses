@@ -16,6 +16,7 @@ export default class controller {
 
         bigUps: [
           { name: 'none', large: false},
+          { name: 'enlarge', large: true},
           { name: 'soul stone', large: true},
           { name: 'drinking horn', attackMod: 2, large: true}
         ],
@@ -40,17 +41,18 @@ export default class controller {
         baseAttack: 7,
 
         attacks: [
-          { name: 'bite', type: 'melee', attackMod: 7, damageDice: '2d6', damageMod: 14},
+          { name: 'bite', type: 'melee', attackMod: 7, damageDice: '2d6', damageMod: 13, largeDamageDice: '3d6', largeDamageMod: 15},
           { name: 'trip', type: 'melee', attackMod: 15, damageDice: '', damageMod: 0}
         ],
 
         bigUps: [
-          { name: 'none', large: false}
+          { name: 'none', large: false},
+          { name: 'enlarge', large: true}
         ],
 
         optionalBonuses: [
           { name: 'haste', attackMod: 1, selected: false},
-          { name: 'power attack', type: 'melee', attackMod: -3, damageMod: 9, selected: true},
+          { name: 'power attack', type: 'melee', attackMod: -3, damageMod: 9, selected: false},
         ],
 
         conditionalBonuses: [
