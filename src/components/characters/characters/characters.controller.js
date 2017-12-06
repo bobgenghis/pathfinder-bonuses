@@ -30,6 +30,7 @@ export default class controller {
         conditionalBonuses: [
           { condition: 'flanking', type: 'melee', attackMod: 4, selected: true},
           { condition: 'opp attack', type: 'melee', attackMod: 4, selected: false},
+          { condition: 'enemy is prone', type: 'melee', attackMod: 4, selected: false},
           { condition: 'vs giant', attackMod: 6, damageMod: 4, selected: false},
           { condition: 'vs orc', attackMod: 2, damageMod: 2, selected: false}
         ]
@@ -55,6 +56,7 @@ export default class controller {
         conditionalBonuses: [
           { condition: 'flanking', type: 'melee', attackMod: 4, selected: true},
           { condition: 'opp attack', type: 'melee', attackMod: 4, selected: false},
+          { condition: 'enemy is prone', type: 'melee', attackMod: 4, selected: false},
           { condition: 'vs giant', attackMod: 4, damageMod: 4, selected: false},
           { condition: 'vs orc', attackMod: 2, damageMod: 2, selected: false}
         ]
