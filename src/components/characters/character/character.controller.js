@@ -102,17 +102,17 @@ export default class controller {
       return '';
     }
     
-    var attackMod = this.miscBonus.attackMod;
+    var attackBonusMod = this.miscBonus.attackMod;
     var selectedAttack = this.selectedAttack;
     
     if (this.selectedBigUp.attackMod) {
-      attackMod += this.selectedBigUp.attackMod;
+      attackBonusMod += this.selectedBigUp.attackMod;
     }
     
     angular.forEach(this.optionalBonuses, function(option, index) {
       if (option.selected) {
         if (option.attackMod && (!option.type || option.type === selectedAttack.type)) {
-          attackMod += option.attackMod;
+          attackBonusMod += option.attackMod;
         }
       }
     });
@@ -120,12 +120,12 @@ export default class controller {
     angular.forEach(this.conditionalBonuses, function(bonus, index) {
       if (bonus.selected) {
         if (bonus.attackMod && (!bonus.type || bonus.type === selectedAttack.type)) {
-          attackMod += bonus.attackMod;
+          attackBonusMod += bonus.attackMod;
         }
       }
     });
 
-    return selectedAttack.name + ' [[d20' + this.getAmount(baseAttack + selectedAttack.attackMod + attackMod) + ']]';
+    return selectedAttack.name + ' [[d20' + this.getAmount(baseAttack + selectedAttack.attackMod + attackBonusMod) + ']]';
   }
   
   getFinalDamage() {
@@ -133,7 +133,7 @@ export default class controller {
       return '';
     }
     
-    var damageMod = this.miscBonus.damageMod;
+    var damageBonusMod = this.miscBonus.damageMod;
     var selectedAttack = this.selectedAttack;
 	
     var damageDice = this.selectedBigUp.large
@@ -147,7 +147,7 @@ export default class controller {
     angular.forEach(this.optionalBonuses, function(option, index) {
       if (option.selected) {
         if (option.damageMod && (!option.type || option.type === selectedAttack.type)) {
-          damageMod += option.damageMod;
+          damageBonusMod += option.damageMod;
         }
       }
     });
@@ -155,7 +155,7 @@ export default class controller {
     angular.forEach(this.conditionalBonuses, function(bonus, index) {
       if (bonus.selected) {
         if (bonus.damageMod && (!bonus.type || bonus.type === selectedAttack.type)) {
-          damageMod += bonus.damageMod;
+          damageBonusMod += bonus.damageMod;
         }
       }
     });
@@ -168,6 +168,6 @@ export default class controller {
       ? selectedAttack.largeDamageMod
       : selectedAttack.damageMod;
       
-    return 'damage: [[' + damageDice + miscDamageDice + this.getAmount(damageBaseMod + damageMod) + ']]';
+    return 'damage: [[' + damageDice + miscDamageDice + this.getAmount(damageBaseMod + damageBonusMod) + ']]';
   }
 }
