@@ -74,7 +74,15 @@ export default class controller {
   }
   
   getAttack(attack) {
-    return this.getAmount(this.baseAttack + attack.attackMod) + ' / ' + attack.damageDice + this.getAmount(attack.damageMod);
+    var damageDice = this.selectedBigUp.large
+      ? this.selectedAttack.largeDamageDice
+      : this.selectedAttack.damageDice;
+
+    var damageMod = this.selectedBigUp.large
+      ? this.selectedAttack.largeDamageMod
+      : this.selectedAttack.damageMod;
+
+    return this.getAmount(this.baseAttack + attack.attackMod) + ' / ' + damageDice + this.getAmount(damageMod);
   }
   
   getAmount(amount) {
