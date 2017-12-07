@@ -65,10 +65,10 @@ export default class controller {
         { name: 'haste', attackMod: 1, selected: false},
         { name: 'power attack', type: 'melee',
           get attackMod() {
-             return (1 + Math.floor(bilo.baseAttack / 4));
+             return -1*(1 + Math.floor(bilo.baseAttack / 4));
             },
             get damageMod() {
-             return 3*(this.attackMod);
+             return -3*(this.attackMod);
             },
           selected: false
         },
