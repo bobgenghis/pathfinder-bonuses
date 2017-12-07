@@ -19,7 +19,7 @@ export default class controller {
       ],
       optionalBonuses: [
         { name: 'haste', attackMod: 1, selected: false},
-        { name: 'bane', attackMod: 2, damageDice: '2d6+2', selected: false},
+        { name: 'bane', attackMod: 2, damageMod: 2, damageDice: '2d6', selected: false},
         { name: 'power attack', type: 'melee',
           get attackMod() {
            return -1*(1 + Math.floor(boendal.baseAttack / 4));
@@ -105,6 +105,6 @@ export default class controller {
       ]
     };
 
-    this.characters = [boendal, mahmud];
+    this.characters = [boendal, bilo];
   }
 }
