@@ -38,18 +38,18 @@ export default class controller {
 	}
   }
 
+  isSoulStone() {
+    return this.selectedBigUp && this.selectedBigUp.name === 'soul stone';
+  }
+
   getBaseAttackRange() {
     var step = 5;
     var input = [];
 
+    var extraAttacks = this.getExtraAttacks(this.optionalBonuses, this.selectedAttack);
+
     if (this.selectedAttack && this.selectedAttack.type) {
-      if (this.isRapidShot()) {
-        input.push(this.baseAttack);
-      }
-	  if (this.isHaste()) {
-        input.push(this.baseAttack);
-      }
-      if (this.isSpellCombat()) {
+      for (var i = 0; i < extraAttacks; i++) {
         input.push(this.baseAttack);
       }
       for (var i = this.baseAttack; i > 0; i -= 5) {
@@ -59,27 +59,15 @@ export default class controller {
     
     return input;
   };
-
-  isSoulStone() {
-    return this.selectedBigUp && this.selectedBigUp.name === 'soul stone';
-  }
   
-  isRapidShot() {
-    return this.selectedAttack && this.selectedAttack.type === 'ranged' && this.optionalBonuses.some(function (b) {
-      return b.name === 'rapid shot' && b.selected === true;
+  getExtraAttacks(bonuses, selectedAttack) {
+    var extraAttacks = 0;
+    angular.forEach(bonuses, function(bonus) {
+      if (bonus.selected && bonus.extraAttacks && (!bonus.type || bonus.type === selectedAttack.type)) {
+        extraAttacks += bonus.extraAttacks;
+      }
     });
-  }
-  
-  isHaste() {
-    return this.optionalBonuses.some(function (b) {
-      return b.name === 'haste' && b.selected === true;
-    });
-  }
-  
-  isSpellCombat() {
-    return this.optionalBonuses.some(function (b) {
-      return b.name === 'spell combat' && b.selected === true;
-    });
+    return extraAttacks;
   }
 
   getAttack(attack) {

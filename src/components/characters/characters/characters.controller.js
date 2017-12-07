@@ -18,7 +18,7 @@ export default class controller {
         { name: 'soul stone', desc:'+1 BAB', large: true},
       ],
       optionalBonuses: [
-        { name: 'haste', attackMod: 1, selected: false},
+        { name: 'haste', attackMod: 1, extraAttacks: 1, selected: false},
         { name: 'bane', attackMod: 2, damageMod: 2, damageDice: '2d6', selected: false},
         { name: 'power attack', type: 'melee',
           get attackMod() {
@@ -38,7 +38,7 @@ export default class controller {
           },
           selected: false
       },
-        { name: 'rapid shot', type: 'ranged', attackMod: -2, selected: false},
+        { name: 'rapid shot', type: 'ranged', extraAttacks: 1, attackMod: -2, selected: false},
         { name: 'alcoholic morale', attackMod: 2, damageMod: 2, selected: false}
       ],
       conditionalBonuses: [
@@ -62,7 +62,7 @@ export default class controller {
         { name: 'enlarge', large: true}
       ],
       optionalBonuses: [
-        { name: 'haste', attackMod: 1, selected: false},
+        { name: 'haste', attackMod: 1, extraAttacks: 1, selected: false},
         { name: 'power attack', type: 'melee',
           get attackMod() {
              return -1*(1 + Math.floor(bilo.baseAttack / 4));
@@ -93,9 +93,9 @@ export default class controller {
         { name: 'none', large: false}
       ],
       optionalBonuses: [
-        { name: 'haste', attackMod: 1, selected: false},
+        { name: 'haste', attackMod: 1, extraAttacks: 1, selected: false},
         { name: 'frostbite', damageDice: '1d6+7', selected: false},
-        { name: 'spell combat', attackMod: -2, selected: true},
+        { name: 'spell combat', attackMod: -2, extraAttacks: 1, selected: true},
         { name: 'arcane accuracy', attackMod: 5, selected: false},
         { name: 'concealment', attackMod: 2, damageMod: 2, selected: false},
       ],
