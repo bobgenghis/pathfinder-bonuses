@@ -4,18 +4,19 @@
 
 <div class="bigUpsWrapper" ng-show="$ctrl.bigUps && $ctrl.bigUps.length > 1">
   <div ng-repeat="bigUp in $ctrl.bigUps track by $index">
-    <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp">{{bigUp.name}}<br>
+    <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp" ng-change="$ctrl.updateBab();">{{bigUp.name}}<br>
   </div>
 </div>
 <br />
 
-<div ng-repeat="attack in $ctrl.attacks track by $index">
-  <input type="radio" ng-model="$ctrl.selectedAttack" ng-value="attack">{{attack.name}} {{$ctrl.getAttack(attack)}}<br>
+<div class="attackWrapper">
+  <div ng-repeat="attack in $ctrl.attacks track by $index">
+    <input type="radio" ng-model="$ctrl.selectedAttack" ng-value="attack">{{attack.name}} {{$ctrl.getAttack(attack)}}<br>
+  </div>
 </div>
-
 <br />
 
-<bonus-list class="optionalWrapper" bonuses="$ctrl.optionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" ></bonus-list>
+<bonus-list class="optionalWrapper" bonuses="$ctrl.optionalBonuses" selected-attack-type="$ctrl.selectedAttack.type"></bonus-list>
 
 <bonus-list class="conditionalWrapper" bonuses="$ctrl.conditionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" ></bonus-list>
 

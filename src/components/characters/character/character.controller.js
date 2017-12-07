@@ -5,7 +5,7 @@ export default class controller {
     Object.assign(this, { $log });
     
     this.name; //binding
-    this.baseAttack; // binding
+    this.baseAttack; // binding, note can change based on selections
     this.attacks = []; //binding
     this.bigUps = []; //binding
     this.optionalBonuses = []; //binding
@@ -14,10 +14,13 @@ export default class controller {
     this.selectedAttack = {};
     this.selectedBigUp = {};
 
+    this.initialBaseAttack; //since the baseAttack can change based on powers. setup in init.
+
     this.miscBonus = { attackMod: 0, damageMod: 0,  damageDice: ''};
   }
   
   $onInit() {
+	this.initialBaseAttack = this.baseAttack;
 	if (this.attacks && this.attacks.length > 0) {
 	  this.selectedAttack = this.attacks[0];
 	}
@@ -27,22 +30,26 @@ export default class controller {
 	}
   }
 
+  updateBab() {
+	if (this.isSoulStone() ) {
+	  this.baseAttack = this.initialBaseAttack + 1;
+	} else {
+	  this.baseAttack = this.initialBaseAttack;
+	}
+  }
+
   getBaseAttackRange() {
     var step = 5;
     var input = [];
-    
-    var baseAttack = this.isSoulStone()
-      ? (this.baseAttack + 1)
-      : this.baseAttack;
-    
+
     if (this.selectedAttack && this.selectedAttack.type) {
       if (this.isRapidShot()) {
-        input.push(baseAttack);
+        input.push(this.baseAttack);
       }
 	  if (this.isHaste()) {
-        input.push(baseAttack);
+        input.push(this.baseAttack);
       }
-      for (var i = baseAttack; i > 0; i -= 5) {
+      for (var i = this.baseAttack; i > 0; i -= 5) {
         input.push(i);
       }
     }
@@ -67,10 +74,7 @@ export default class controller {
   }
   
   getAttack(attack) {
-	var baseAttack = this.isSoulStone()
-      ? (this.baseAttack + 1)
-      : this.baseAttack;
-    return this.getAmount(baseAttack + attack.attackMod) + ' / ' + attack.damageDice + this.getAmount(attack.damageMod);
+    return this.getAmount(this.baseAttack + attack.attackMod) + ' / ' + attack.damageDice + this.getAmount(attack.damageMod);
   }
   
   getAmount(amount) {
@@ -122,7 +126,7 @@ export default class controller {
     damageBonusMod += this.getBonusDamageMod(this.optionalBonuses, selectedAttack);
     damageBonusMod += this.getBonusDamageMod(this.conditionalBonuses, selectedAttack);
 
-    var miscDamageDice = this.miscBonus.damageDice && this.miscBonus.damageDice.length > 0
+    var miscDamageDice = (this.miscBonus.damageDice && this.miscBonus.damageDice.length > 0)
       ? ('+' + this.miscBonus.damageDice)
       : '';
   
@@ -135,7 +139,7 @@ export default class controller {
 
   getBonusAttackMod(bonuses, selectedAttack) {
     var bonusAttackMod = 0;
-    angular.forEach(bonuses, function(bonus, index) {
+    angular.forEach(bonuses, function(bonus) {
       if (bonus.selected && bonus.attackMod && (!bonus.type || bonus.type === selectedAttack.type)) {
         bonusAttackMod += bonus.attackMod;
       }
@@ -145,7 +149,7 @@ export default class controller {
 
   getBonusDamageMod(bonuses, selectedAttack) {
     var bonusDamageMod = 0;
-    angular.forEach(bonuses, function(bonus, index) {
+    angular.forEach(bonuses, function(bonus) {
       if (bonus.selected && bonus.damageMod && (!bonus.type || bonus.type === selectedAttack.type)) {
         bonusDamageMod += bonus.damageMod;
       }

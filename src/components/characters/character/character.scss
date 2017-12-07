@@ -7,11 +7,15 @@ character {
 	min-height: 80px;
   }
 
+  .attackWrapper {
+    min-height: 60px;
+  }
+
   .optionalWrapper {
-	min-height: 60px;
+    min-height: 100px;
   }
 
   .conditionalWrapper {
-	min-height: 120px;
+    min-height: 120px;
   }
 }

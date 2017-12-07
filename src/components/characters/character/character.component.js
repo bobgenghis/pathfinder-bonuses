@@ -4,7 +4,7 @@ import template from './character.html';
 export default {
   bindings: {
     name: '<',
-    baseAttack: '<',
+    baseAttack: '=',
     attacks: '<',
     bigUps: '<',
     optionalBonuses: '<',
