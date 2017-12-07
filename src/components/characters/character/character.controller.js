@@ -75,12 +75,12 @@ export default class controller {
   
   getAttack(attack) {
     var damageDice = this.selectedBigUp.large
-      ? this.selectedAttack.largeDamageDice
-      : this.selectedAttack.damageDice;
+      ? attack.largeDamageDice
+      : attack.damageDice;
 
     var damageMod = this.selectedBigUp.large
-      ? this.selectedAttack.largeDamageMod
-      : this.selectedAttack.damageMod;
+      ? attack.largeDamageMod
+      : attack.damageMod;
 
     return this.getAmount(this.baseAttack + attack.attackMod) + ' / ' + damageDice + this.getAmount(damageMod);
   }

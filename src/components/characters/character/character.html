@@ -4,7 +4,7 @@
 
 <div class="bigUpsWrapper" ng-show="$ctrl.bigUps && $ctrl.bigUps.length > 1">
   <div ng-repeat="bigUp in $ctrl.bigUps track by $index">
-    <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp" ng-change="$ctrl.updateBab();">{{bigUp.name}}<br>
+    <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp" ng-change="$ctrl.updateBab();">{{bigUp.name}} {{bigUp.desc}}<br>
   </div>
 </div>
 <br />

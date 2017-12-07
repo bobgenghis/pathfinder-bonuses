@@ -17,7 +17,7 @@ export default class controller {
 	  bigUps: [
 	    { name: 'none', large: false},
 	    { name: 'enlarge', large: true},
-	    { name: 'soul stone', large: true},
+	    { name: 'soul stone', desc:'+1 BAB', large: true},
 	  ],
 
 	  optionalBonuses: [
@@ -41,7 +41,7 @@ export default class controller {
 	      selected: false
 		},
 	    { name: 'rapid shot', type: 'ranged', attackMod: -2, selected: false},
-	    { name: 'morale from alcohol', attackMod: 2, damageMod: 2, selected: false}
+	    { name: 'alcoholic morale', attackMod: 2, damageMod: 2, selected: false}
 	  ],
 
 	  conditionalBonuses: [
@@ -88,7 +88,39 @@ export default class controller {
         { name: 'vs orc', attackMod: 2, damageMod: 2, selected: false}
       ]
     };
+	
+	/*var mahmud = {
+      name: 'Mahmud',
+      baseAttack: 6,
 
-    this.characters = [boendal, bilo];
+      attacks: [
+        { name: 'scimitar', type: 'melee', attackMod: 6, damageDice: '1d6', damageMod: 6},
+        { name: 'scimitar w/ frostbite', type: 'melee', attackMod: 6, damageDice: '1d6+1d6', damageMod: 13}
+      ],
+
+      bigUps: [
+        { name: 'none', large: false}
+      ],
+
+      optionalBonuses: [
+        { name: 'haste', attackMod: 1, selected: false},
+        { name: 'power attack', type: 'melee',
+          get attackMod() {
+             return (1 + Math.floor(bilo.baseAttack / 4));
+            },
+            get damageMod() {
+             return 3*(this.attackMod);
+            },
+          selected: false
+        },
+      ],
+
+      conditionalBonuses: [
+        { name: 'flanking', type: 'melee', attackMod: 2, selected: true},
+		{ name: 'outflank (stack with flanking)', type: 'melee', attackMod: 2, selected: true}
+      ]
+    };*/
+
+    this.characters = [boendal];
   }
 }
