@@ -136,7 +136,7 @@ export default class controller {
     var damageBonusMod = this.miscBonus.damageMod;
     var selectedAttack = this.selectedAttack;
 	
-    var damageDice = this.selectedBigUp.large
+    var damageDice = (this.selectedBigUp.large && selectedAttack.largeDamageDice)
       ? selectedAttack.largeDamageDice
       : selectedAttack.damageDice;
 	  
