@@ -12,12 +12,19 @@ export default class controller {
     var attackMod = (bonus && bonus.attackMod)
       ? this.getAmount(bonus.attackMod) + ' attack '
       : '';
-    
-    var damageMod = (bonus && bonus.damageMod)
-      ? this.getAmount(bonus.damageMod) + ' damage '
+
+    var damage = bonus.damageDice
+      ? bonus.damageDice
       : '';
+
+	if (bonus && bonus.damageMod) {
+      damage += this.getAmount(bonus.damageMod);
+	}
+    if (damage && damage !== '') {
+	  damage += ' damage';
+	}
     
-    return attackMod + damageMod;
+    return attackMod + damage;
   }
   
   getAmount(amount) {

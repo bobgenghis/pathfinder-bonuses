@@ -49,6 +49,9 @@ export default class controller {
 	  if (this.isHaste()) {
         input.push(this.baseAttack);
       }
+      if (this.isSpellCombat()) {
+        input.push(this.baseAttack);
+      }
       for (var i = this.baseAttack; i > 0; i -= 5) {
         input.push(i);
       }
@@ -56,7 +59,7 @@ export default class controller {
     
     return input;
   };
-  
+
   isSoulStone() {
     return this.selectedBigUp && this.selectedBigUp.name === 'soul stone';
   }
@@ -73,6 +76,12 @@ export default class controller {
     });
   }
   
+  isSpellCombat() {
+    return this.optionalBonuses.some(function (b) {
+      return b.name === 'spell combat' && b.selected === true;
+    });
+  }
+
   getAttack(attack) {
     var damageDice = this.selectedBigUp.large
       ? attack.largeDamageDice
@@ -82,7 +91,11 @@ export default class controller {
       ? attack.largeDamageMod
       : attack.damageMod;
 
-    return this.getAmount(this.baseAttack + attack.attackMod) + ' / ' + damageDice + this.getAmount(damageMod);
+    var extraDamage = attack.extraDamage
+	  ? '+' + attack.extraDamage
+	  : '';
+
+    return this.getAmount(this.baseAttack + attack.attackMod) + ' / ' + damageDice + this.getAmount(damageMod) + extraDamage;
   }
   
   getAmount(amount) {
@@ -134,15 +147,18 @@ export default class controller {
     damageBonusMod += this.getBonusDamageMod(this.optionalBonuses, selectedAttack);
     damageBonusMod += this.getBonusDamageMod(this.conditionalBonuses, selectedAttack);
 
-    var miscDamageDice = (this.miscBonus.damageDice && this.miscBonus.damageDice.length > 0)
+    var extraDamageDice = (this.miscBonus.damageDice && this.miscBonus.damageDice.length > 0)
       ? ('+' + this.miscBonus.damageDice)
       : '';
-  
+
+	extraDamageDice += this.getBonusDamageDice(this.optionalBonuses, selectedAttack);
+	extraDamageDice += this.getBonusDamageDice(this.conditionalBonuses, selectedAttack);
+
     var damageBaseMod = this.selectedBigUp.large
       ? selectedAttack.largeDamageMod
       : selectedAttack.damageMod;
       
-    return 'damage: [[' + damageDice + miscDamageDice + this.getAmount(damageBaseMod + damageBonusMod) + ']]';
+    return 'damage: [[' + damageDice + this.getAmount(damageBaseMod + damageBonusMod) + extraDamageDice + ']]';
   }
 
   getBonusAttackMod(bonuses, selectedAttack) {
@@ -163,5 +179,15 @@ export default class controller {
       }
     });
     return bonusDamageMod;
+  }
+
+  getBonusDamageDice(bonuses, selectedAttack) {
+    var bonusDamageDice = '';
+    angular.forEach(bonuses, function(bonus) {
+      if (bonus.selected && bonus.damageDice && (!bonus.type || bonus.type === selectedAttack.type)) {
+        bonusDamageDice += ('+' + bonus.damageDice);
+      }
+    });
+    return bonusDamageDice;
   }
 }
