@@ -3,6 +3,7 @@ import template from './bonus-list.html';
 
 export default {
   bindings: {
+    baseAttack: '<',
     bonuses: '<',
     selectedAttackType: '<',
     selectedTotal: '='

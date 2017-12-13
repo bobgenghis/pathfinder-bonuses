@@ -5,6 +5,7 @@ export default class controller {
     Object.assign(this, { $log });
     
     this.selectedAttackType; //binding
+    this.baseAttack; //binding, to trigger onChanges
     this.bonuses = []; //binding
     this.selectedTotal = {}; //binding
   }

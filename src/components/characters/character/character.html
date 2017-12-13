@@ -14,8 +14,8 @@
 </div>
 <br />
 
-<bonus-list class="optionalWrapper" bonuses="$ctrl.optionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" selected-total="$ctrl.optionalTotal" ></bonus-list>
-<bonus-list class="conditionalWrapper" bonuses="$ctrl.conditionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" selected-total="$ctrl.conditionalTotal" ></bonus-list>
+<bonus-list class="optionalWrapper" base-attack="$ctrl.baseAttack" bonuses="$ctrl.optionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" selected-total="$ctrl.optionalTotal" ></bonus-list>
+<bonus-list class="conditionalWrapper" base-attack="$ctrl.baseAttack" bonuses="$ctrl.conditionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" selected-total="$ctrl.conditionalTotal" ></bonus-list>
 
 Misc Attack Mod: <input type="number" ng-model="$ctrl.miscBonus.attackMod" ng-change="$ctrl.updateMisc();"/>
 <br />
