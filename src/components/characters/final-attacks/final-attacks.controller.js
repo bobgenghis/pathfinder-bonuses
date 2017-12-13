@@ -8,15 +8,16 @@ export default class controller {
     this.selectedAttack; //binding, expected int
     this.selectedBigUp = {}; //binding
     
-    this.optionalBonusSum = []; //binding
-    this.conditionalBonusSum = []; //binding
-    this.miscBonusSum = []; //binding
+    this.optionalBonuses = []; //binding
+    this.conditionalBonuses = []; //binding
+    this.miscBonuses = []; //binding
     
     this.baseAttackRange = [];
     this.totalBonuses = {};
   }
   
   $onChanges() {
+	this.$log.info('final $onChanges');
     this.baseAttackRange = this.getBaseAttackRange();
     this.totalBonuses = this.getTotalBonuses();
   }
@@ -28,8 +29,8 @@ export default class controller {
       return attackRange;
     }
 
-    var extraAttacks = this.optionalBonusSum.extraAttacks
-    + this.conditionalBonusSum.extraAttacks;
+    var extraAttacks = this.optionalBonuses.extraAttacks
+    + this.conditionalBonuses.extraAttacks;
 
     for (var i = 0; i < extraAttacks; i++) {
       attackRange.push(this.baseAttack);
@@ -43,10 +44,10 @@ export default class controller {
   
   getTotalBonuses() {
     return {
-      attackMod: this.optionalBonusSum.attackMod + this.conditionalBonusSum.attackMod + this.miscBonusSum.attackMod,
-      damageMod: this.optionalBonusSum.damageMod + this.conditionalBonusSum.damageMod + this.miscBonusSum.damageMod,
-      damageDice: this.optionalBonusSum.damageDice + this.conditionalBonusSum.damageDice + this.miscBonusSum.damageDice,
-      extraAttacks: this.optionalBonusSum.extraAttacks + this.conditionalBonusSum.extraAttacks
+      attackMod: this.optionalBonuses.attackMod + this.conditionalBonuses.attackMod + this.miscBonuses.attackMod,
+      damageMod: this.optionalBonuses.damageMod + this.conditionalBonuses.damageMod + this.miscBonuses.damageMod,
+      damageDice: this.optionalBonuses.damageDice + this.conditionalBonuses.damageDice + this.miscBonuses.damageDice,
+      extraAttacks: this.optionalBonuses.extraAttacks + this.conditionalBonuses.extraAttacks
     };
   }
   

@@ -18,6 +18,12 @@ export default class controller {
     this.optionalTotal = {};
     this.conditionalTotal = {};
 
+    this.miscTotal = {
+      attackMod: 0,
+      damageMod: 0,
+      damageDice: ''
+    };
+
     this.miscBonus = {
       attackMod: 0,
       damageMod: 0,
@@ -41,6 +47,14 @@ export default class controller {
       this.baseAttack = this.initialBaseAttack + 1;
     } else {
       this.baseAttack = this.initialBaseAttack;
+    }
+  }
+
+  updateMisc() {
+    //need to copy to trigger onChange for final
+    this.miscTotal = angular.copy(this.miscBonus);
+    if (this.miscTotal.damageDice && this.miscTotal.damageDice !== '') {
+      this.miscTotal.damageDice = ('+' + this.miscTotal.damageDice);
     }
   }
 

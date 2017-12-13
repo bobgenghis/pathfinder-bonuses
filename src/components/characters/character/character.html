@@ -17,11 +17,11 @@
 <bonus-list class="optionalWrapper" bonuses="$ctrl.optionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" selected-total="$ctrl.optionalTotal" ></bonus-list>
 <bonus-list class="conditionalWrapper" bonuses="$ctrl.conditionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" selected-total="$ctrl.conditionalTotal" ></bonus-list>
 
-Misc Attack Mod: <input type="number" ng-model="$ctrl.miscBonus.attackMod"/>
+Misc Attack Mod: <input type="number" ng-model="$ctrl.miscBonus.attackMod" ng-change="$ctrl.updateMisc();"/>
 <br />
-Misc Damage Mod: <input type="number" ng-model="$ctrl.miscBonus.damageMod"/>
+Misc Damage Mod: <input type="number" ng-model="$ctrl.miscBonus.damageMod" ng-change="$ctrl.updateMisc();"/>
 <br />
-Misc Damage Dice: <input type="text" ng-model="$ctrl.miscBonus.damageDice"/>
+Misc Damage Dice: <input type="text" ng-model="$ctrl.miscBonus.damageDice" ng-change="$ctrl.updateMisc();"/>
 <br />
 
 <br />
@@ -30,9 +30,9 @@ Misc Damage Dice: <input type="text" ng-model="$ctrl.miscBonus.damageDice"/>
 <final-attacks base-attack="$ctrl.baseAttack"
   selected-attack="$ctrl.selectedAttack"
   selected-big-up="$ctrl.selectedBigUp"
-  optional-bonus-sum="$ctrl.optionalTotal"
-  conditional-bonus-sum="$ctrl.conditionalTotal"
-  misc-bonus-sum="$ctrl.miscBonus"></final-attacks>
+  optional-bonuses="$ctrl.optionalTotal"
+  conditional-bonuses="$ctrl.conditionalTotal"
+  misc-bonuses="$ctrl.miscTotal"></final-attacks>
 
 </div>
 

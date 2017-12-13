@@ -6,9 +6,9 @@ export default {
     baseAttack: '<',
     selectedAttack: '<',
     selectedBigUp: '<',
-    optionalBonusSum: '<',
-    conditionalBonusSum: '<',
-    miscBonusSum: '<'
+    optionalBonuses: '<',
+    conditionalBonuses: '<',
+    miscBonuses: '<',
   },
   controller,
   name: 'finalAttacks',
