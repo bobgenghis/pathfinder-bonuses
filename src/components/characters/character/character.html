@@ -1,7 +1,5 @@
 <h1>{{$ctrl.name}}</h1>
 
-<p>Base Attack: + {{$ctrl.getBaseAttackRange()}}</p>
-
 <div class="bigUpsWrapper" ng-show="$ctrl.bigUps && $ctrl.bigUps.length > 1">
   <div ng-repeat="bigUp in $ctrl.bigUps track by $index">
     <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp" ng-change="$ctrl.updateBab();">{{bigUp.name}} {{bigUp.desc}}<br>
@@ -16,9 +14,8 @@
 </div>
 <br />
 
-<bonus-list class="optionalWrapper" bonuses="$ctrl.optionalBonuses" selected-attack-type="$ctrl.selectedAttack.type"></bonus-list>
-
-<bonus-list class="conditionalWrapper" bonuses="$ctrl.conditionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" ></bonus-list>
+<bonus-list class="optionalWrapper" bonuses="$ctrl.optionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" selected-total="$ctrl.optionalTotal" ></bonus-list>
+<bonus-list class="conditionalWrapper" bonuses="$ctrl.conditionalBonuses" selected-attack-type="$ctrl.selectedAttack.type" selected-total="$ctrl.conditionalTotal" ></bonus-list>
 
 Misc Attack Mod: <input type="number" ng-model="$ctrl.miscBonus.attackMod"/>
 <br />
@@ -30,12 +27,13 @@ Misc Damage Dice: <input type="text" ng-model="$ctrl.miscBonus.damageDice"/>
 <br />
 <br />
 
-<div ng-repeat="baseAttack in $ctrl.getBaseAttackRange() track by $index">
-  <span>{{$ctrl.getFinalAttack(baseAttack)}}</span>
-  <br />
-  <span>{{$ctrl.getFinalDamage()}}</span>
-  <br />
-  <br />
+<final-attacks base-attack="$ctrl.baseAttack"
+  selected-attack="$ctrl.selectedAttack"
+  selected-big-up="$ctrl.selectedBigUp"
+  optional-bonus-sum="$ctrl.optionalTotal"
+  conditional-bonus-sum="$ctrl.conditionalTotal"
+  misc-bonus-sum="$ctrl.miscBonus"></final-attacks>
+
 </div>
 
 

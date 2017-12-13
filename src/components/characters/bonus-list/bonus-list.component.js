@@ -4,7 +4,8 @@ import template from './bonus-list.html';
 export default {
   bindings: {
     bonuses: '<',
-    selectedAttackType: '<'
+    selectedAttackType: '<',
+    selectedTotal: '='
   },
   controller,
   name: 'bonusList',

@@ -22,22 +22,22 @@ export default class controller {
         { name: 'bane', attackMod: 2, damageMod: 2, damageDice: '2d6', selected: false},
         { name: 'power attack', type: 'melee',
           get attackMod() {
-           return -1*(1 + Math.floor(boendal.baseAttack / 4));
+            return -1*(1 + Math.floor(boendal.baseAttack / 4));
           },
           get damageMod() {
-           return -3*(this.attackMod);
+            return -3*(this.attackMod);
           },
           selected: true
-      },
+        },
         { name: 'deadly aim', type: 'ranged',
           get attackMod() {
-           return -1*(1 + Math.floor(boendal.baseAttack / 4));
+            return -1*(1 + Math.floor(boendal.baseAttack / 4));
           },
           get damageMod() {
-           return -2*(this.attackMod);
+            return -2*(this.attackMod);
           },
           selected: false
-      },
+        },
         { name: 'rapid shot', type: 'ranged', extraAttacks: 1, attackMod: -2, selected: false},
         { name: 'alcoholic morale', attackMod: 2, damageMod: 2, selected: false}
       ],
@@ -65,11 +65,11 @@ export default class controller {
         { name: 'haste', attackMod: 1, extraAttacks: 1, selected: false},
         { name: 'power attack', type: 'melee',
           get attackMod() {
-             return -1*(1 + Math.floor(bilo.baseAttack / 4));
-            },
-            get damageMod() {
-             return -3*(this.attackMod);
-            },
+            return -1*(1 + Math.floor(bilo.baseAttack / 4));
+          },
+          get damageMod() {
+           return -3*(this.attackMod);
+          },
           selected: false
         },
       ],

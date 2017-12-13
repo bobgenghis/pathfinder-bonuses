@@ -11,63 +11,41 @@ export default class controller {
     this.optionalBonuses = []; //binding
     this.conditionalBonuses = []; //binding
 
-    this.selectedAttack = {};
-    this.selectedBigUp = {};
-
     this.initialBaseAttack; //since the baseAttack can change based on powers. setup in init.
 
-    this.miscBonus = { attackMod: 0, damageMod: 0,  damageDice: ''};
+    this.selectedAttack = {};
+    this.selectedBigUp = {};
+    this.optionalTotal = {};
+    this.conditionalTotal = {};
+
+    this.miscBonus = {
+      attackMod: 0,
+      damageMod: 0,
+      damageDice: ''
+    };
   }
   
   $onInit() {
-	this.initialBaseAttack = this.baseAttack;
-	if (this.attacks && this.attacks.length > 0) {
-	  this.selectedAttack = this.attacks[0];
-	}
-	
-	if (this.bigUps && this.bigUps.length > 0) {
-	  this.selectedBigUp = this.bigUps[0];
-	}
+    this.initialBaseAttack = this.baseAttack;
+    if (this.attacks && this.attacks.length > 0) {
+      this.selectedAttack = this.attacks[0];
+    }
+
+    if (this.bigUps && this.bigUps.length > 0) {
+      this.selectedBigUp = this.bigUps[0];
+    }
   }
 
   updateBab() {
-	if (this.isSoulStone() ) {
-	  this.baseAttack = this.initialBaseAttack + 1;
-	} else {
-	  this.baseAttack = this.initialBaseAttack;
-	}
+    if (this.isSoulStone() ) {
+      this.baseAttack = this.initialBaseAttack + 1;
+    } else {
+      this.baseAttack = this.initialBaseAttack;
+    }
   }
 
   isSoulStone() {
     return this.selectedBigUp && this.selectedBigUp.name === 'soul stone';
-  }
-
-  getBaseAttackRange() {
-    var step = 5;
-    var input = [];
-
-    var extraAttacks = this.getExtraAttacks(this.optionalBonuses, this.selectedAttack);
-
-    if (this.selectedAttack && this.selectedAttack.type) {
-      for (var i = 0; i < extraAttacks; i++) {
-        input.push(this.baseAttack);
-      }
-      for (var i = this.baseAttack; i > 0; i -= 5) {
-        input.push(i);
-      }
-    }
-    
-    return input;
-  };
-  
-  getExtraAttacks(bonuses, selectedAttack) {
-    var extraAttacks = 0;
-    angular.forEach(bonuses, function(bonus) {
-      if (bonus.selected && bonus.extraAttacks && (!bonus.type || bonus.type === selectedAttack.type)) {
-        extraAttacks += bonus.extraAttacks;
-      }
-    });
-    return extraAttacks;
   }
 
   getAttack(attack) {
@@ -80,11 +58,12 @@ export default class controller {
       : attack.damageMod;
 
     var extraDamage = attack.extraDamage
-	  ? '+' + attack.extraDamage
-	  : '';
+      ? '+' + attack.extraDamage
+      : '';
 
     return this.getAmount(this.baseAttack + attack.attackMod) + ' / ' + damageDice + this.getAmount(damageMod) + extraDamage;
   }
+
   
   getAmount(amount) {
     if (angular.isDefined(amount)) {
@@ -96,86 +75,5 @@ export default class controller {
         return amount;
       }
     }
-  }
-  
-  getFinalAttack(baseAttack) {
-    if (!(baseAttack && this.selectedAttack && this.selectedAttack.name)) {
-      return '';
-    }
-    
-    var attackBonusMod = this.miscBonus.attackMod;
-    var selectedAttack = this.selectedAttack;
-    
-    if (this.selectedBigUp.attackMod) {
-      attackBonusMod += this.selectedBigUp.attackMod;
-    }
-
-    attackBonusMod += this.getBonusAttackMod(this.optionalBonuses, selectedAttack);
-    attackBonusMod += this.getBonusAttackMod(this.conditionalBonuses, selectedAttack);
-
-    return selectedAttack.name + ' [[d20' + this.getAmount(baseAttack + selectedAttack.attackMod + attackBonusMod) + ']]';
-  }
-  
-  getFinalDamage() {
-    if (!(this.selectedAttack && this.selectedAttack.name)) {
-      return '';
-    }
-    
-    var damageBonusMod = this.miscBonus.damageMod;
-    var selectedAttack = this.selectedAttack;
-	
-    var damageDice = (this.selectedBigUp.large && selectedAttack.largeDamageDice)
-      ? selectedAttack.largeDamageDice
-      : selectedAttack.damageDice;
-	  
-    if (!damageDice || damageDice === '') {
-	  return '';
-    }
-
-    damageBonusMod += this.getBonusDamageMod(this.optionalBonuses, selectedAttack);
-    damageBonusMod += this.getBonusDamageMod(this.conditionalBonuses, selectedAttack);
-
-    var extraDamageDice = (this.miscBonus.damageDice && this.miscBonus.damageDice.length > 0)
-      ? ('+' + this.miscBonus.damageDice)
-      : '';
-
-	extraDamageDice += this.getBonusDamageDice(this.optionalBonuses, selectedAttack);
-	extraDamageDice += this.getBonusDamageDice(this.conditionalBonuses, selectedAttack);
-
-    var damageBaseMod = this.selectedBigUp.large
-      ? selectedAttack.largeDamageMod
-      : selectedAttack.damageMod;
-      
-    return 'damage: [[' + damageDice + this.getAmount(damageBaseMod + damageBonusMod) + extraDamageDice + ']]';
-  }
-
-  getBonusAttackMod(bonuses, selectedAttack) {
-    var bonusAttackMod = 0;
-    angular.forEach(bonuses, function(bonus) {
-      if (bonus.selected && bonus.attackMod && (!bonus.type || bonus.type === selectedAttack.type)) {
-        bonusAttackMod += bonus.attackMod;
-      }
-    });
-    return bonusAttackMod;
-  }
-
-  getBonusDamageMod(bonuses, selectedAttack) {
-    var bonusDamageMod = 0;
-    angular.forEach(bonuses, function(bonus) {
-      if (bonus.selected && bonus.damageMod && (!bonus.type || bonus.type === selectedAttack.type)) {
-        bonusDamageMod += bonus.damageMod;
-      }
-    });
-    return bonusDamageMod;
-  }
-
-  getBonusDamageDice(bonuses, selectedAttack) {
-    var bonusDamageDice = '';
-    angular.forEach(bonuses, function(bonus) {
-      if (bonus.selected && bonus.damageDice && (!bonus.type || bonus.type === selectedAttack.type)) {
-        bonusDamageDice += ('+' + bonus.damageDice);
-      }
-    });
-    return bonusDamageDice;
   }
 }
