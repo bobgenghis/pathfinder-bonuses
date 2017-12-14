@@ -76,7 +76,7 @@ export default class controller {
       ],
       conditionalBonuses: [
         { name: 'flanking', type: 'melee', attackMod: 4, selected: true},
-        { name: 'adj and flanking (menacing)', type: 'melee', attackMod: 2, selected: false},
+        { name: 'adj to flanked enemy', type: 'melee', attackMod: 2, selected: false},
         { name: 'opp attack', type: 'melee', attackMod: 4, selected: false},
         { name: 'enemy is prone', type: 'melee', attackMod: 4, selected: false},
         { name: 'vs giant', attackMod: 4, damageMod: 4, selected: false},
@@ -89,7 +89,20 @@ export default class controller {
       baseAttack: 6,
 
       attacks: [
-        { name: 'scimitar', type: 'melee', attackMod: 6, damageDice: '1d6', damageMod: 6}
+        { name: 'scimitar', type: 'melee', attackMod: 12, damageDice: '1d6', damageMod: 6},
+        { name: 'claw', type: 'melee', attackMod: 11, damageDice: '1d4', damageMod: 5,
+          get extraAttacks() {
+            return mahmud.optionalBonuses.some(x => x.selected && x.name === 'spell combat')
+              ? 2
+              : 3;
+          },
+          isNatural: true,
+          get secondaryAttack() {
+            return mahmud.optionalBonuses.some(x => x.selected && x.name === 'spell combat')
+             ? {}
+             : { name: 'bite', type: 'melee', attackMod: 6, damageDice: '1d6', damageMod: 6, isNatural: true, attacks: 1}
+          }
+        }
       ],
       bigUps: [
         { name: 'none', large: false}
@@ -97,7 +110,9 @@ export default class controller {
       optionalBonuses: [
         { name: 'haste', attackMod: 1, extraAttacks: 1, selected: false},
         { name: 'frostbite', damageDice: '1d6+7', selected: false},
-        { name: 'spell combat', attackMod: -2, extraAttacks: 1, selected: true},
+        { name: 'monstrous physique', attackMod: 1, damageMod: 1, selected: false},
+        { name: 'spell combat', attackMod: -2, selected: true},
+        { name: '+spell strike', extraAttacks: 1, selected: true},
         { name: 'arcane accuracy', attackMod: 5, selected: false},
         { name: 'concealment', attackMod: 2, damageMod: 2, selected: false},
       ],
@@ -107,6 +122,6 @@ export default class controller {
       ]
     };
 
-    this.characters = [boendal, bilo];
+    this.characters = [boendal, mahmud];
   }
 }

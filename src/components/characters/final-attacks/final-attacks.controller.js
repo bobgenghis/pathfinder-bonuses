@@ -12,35 +12,83 @@ export default class controller {
     this.conditionalBonuses = []; //binding
     this.miscBonuses = []; //binding
     
-    this.baseAttackRange = [];
+    this.baseAttacks = [];
     this.totalBonuses = {};
   }
   
   $onChanges() {
-    this.baseAttackRange = this.getBaseAttackRange();
+    this.baseAttacks = this.getBaseAttacks();
     this.totalBonuses = this.getTotalBonuses();
   }
   
-  getBaseAttackRange() {
+  getBaseAttacks() {
     var attackRange = [];
   
     if (!(this.baseAttack && this.selectedAttack && this.selectedAttack.name)) {
       return attackRange;
     }
 
-    var extraAttacks = this.optionalBonuses.extraAttacks
-    + this.conditionalBonuses.extraAttacks;
+    var damageDice = (this.selectedBigUp.large && this.selectedAttack.largeDamageDice)
+      ? this.selectedAttack.largeDamageDice
+      : this.selectedAttack.damageDice;
 
-    for (var i = 0; i < extraAttacks; i++) {
-      attackRange.push(this.baseAttack);
+    var damageBaseMod = this.selectedBigUp.large
+      ? this.selectedAttack.largeDamageMod
+      : this.selectedAttack.damageMod;
+
+    var extraAttacks = angular.isDefined(this.selectedAttack.extraAttacks)
+      ? this.selectedAttack.extraAttacks
+      : 0;
+
+    extraAttacks += (this.optionalBonuses.extraAttacks
+      + this.conditionalBonuses.extraAttacks);
+
+    var firstAttack = {
+      name: this.selectedAttack.name,
+      type: this.selectedAttack.type,
+      attackMod: this.baseAttack + this.selectedAttack.attackMod,
+      damageDice: damageDice,
+      damageMod: damageBaseMod
+    };
+
+    //push first attack always, plus extras
+    for (var i = 0; i < (extraAttacks+1); i++) {
+      attackRange.push(firstAttack);
     }
-    for (var i = this.baseAttack; i > 0; i -= 5) {
-      attackRange.push(i);
+
+    if (!this.selectedAttack.isNatural) {
+      for (var iterativeAttack = (this.baseAttack-5); iterativeAttack > 0; iterativeAttack -= 5) {
+        attackRange.push({
+          name: this.selectedAttack.name,
+          type: this.selectedAttack.type,
+          attackMod: iterativeAttack + this.selectedAttack.attackMod,
+          damageDice: damageDice,
+          damageMod: damageBaseMod
+        });
+      }
     }
-    
+
+    if (this.selectedAttack.secondaryAttack && this.selectedAttack.secondaryAttack.name) {
+      var secondaryDamageDice = (this.selectedBigUp.large && this.selectedAttack.largeDamageDice)
+        ? this.selectedAttack.secondaryAttack.largeDamageDice
+        : this.selectedAttack.secondaryAttack.damageDice;
+
+      var secondaryDamageBaseMod = this.selectedBigUp.large
+        ? this.selectedAttack.secondaryAttack.largeDamageMod
+        : this.selectedAttack.secondaryAttack.damageMod;
+
+      attackRange.push({
+        name: this.selectedAttack.secondaryAttack.name,
+        type: this.selectedAttack.secondaryAttack.type,
+        attackMod: this.selectedAttack.secondaryAttack.attackMod,
+        damageDice: secondaryDamageDice,
+        damageMod: secondaryDamageBaseMod
+      });
+    }
+
     return attackRange;
   };
-  
+
   getTotalBonuses() {
     return {
       attackMod: this.optionalBonuses.attackMod + this.conditionalBonuses.attackMod + this.miscBonuses.attackMod,
@@ -51,14 +99,9 @@ export default class controller {
   }
   
   getFinalAttack(baseAttack) {
-    if (!(baseAttack && this.selectedAttack && this.selectedAttack.name)) {
-      return '';
-    }
-    
     var attackBonusMod = this.totalBonuses.attackMod;
-    var selectedAttack = this.selectedAttack;
 
-    if (this.selectedBigUp && this.selectedBigUp.large && selectedAttack.type && selectedAttack.type === 'ranged') {
+    if (this.selectedBigUp && this.selectedBigUp.large && baseAttack.type && baseAttack.type === 'ranged') {
       attackBonusMod -= 2;
     }
 
@@ -66,29 +109,15 @@ export default class controller {
       attackBonusMod += this.selectedBigUp.attackMod;
     }
 
-    return selectedAttack.name + ' [[d20' + this.getAmount(baseAttack + selectedAttack.attackMod + attackBonusMod) + ']]';
+    return baseAttack.name + ' [[d20' + this.getAmount(baseAttack.attackMod + attackBonusMod) + ']]';
   }
   
-  getFinalDamage() {
-    if (!(this.selectedAttack && this.selectedAttack.name)) {
+  getFinalDamage(baseAttack) {
+    if (!baseAttack.damageDice || baseAttack.damageDice === '') {
       return '';
     }
-    
-    var selectedAttack = this.selectedAttack;
-  
-    var damageDice = (this.selectedBigUp.large && selectedAttack.largeDamageDice)
-      ? selectedAttack.largeDamageDice
-      : selectedAttack.damageDice;
-    
-    if (!damageDice || damageDice === '') {
-    return '';
-    }
-
-    var damageBaseMod = this.selectedBigUp.large
-      ? selectedAttack.largeDamageMod
-      : selectedAttack.damageMod;
       
-    return 'damage: [[' + damageDice + this.getAmount(damageBaseMod + this.totalBonuses.damageMod) + this.totalBonuses.damageDice + ']]';
+    return 'damage: [[' + baseAttack.damageDice + this.getAmount(baseAttack.damageMod + this.totalBonuses.damageMod) + this.totalBonuses.damageDice + ']]';
   }
   
   getAmount(amount) {

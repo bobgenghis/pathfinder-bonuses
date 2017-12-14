@@ -1,7 +1,7 @@
-<div ng-repeat="baseAttack in $ctrl.baseAttackRange track by $index">
+<div ng-repeat="baseAttack in $ctrl.baseAttacks track by $index">
   <span>{{$ctrl.getFinalAttack(baseAttack)}}</span>
   <br />
-  <span>{{$ctrl.getFinalDamage()}}</span>
+  <span>{{$ctrl.getFinalDamage(baseAttack)}}</span>
   <br />
   <br />
 </div>

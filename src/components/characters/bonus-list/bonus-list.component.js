@@ -5,7 +5,7 @@ export default {
   bindings: {
     baseAttack: '<',
     bonuses: '<',
-    selectedAttackType: '<',
+    attackType: '<',
     selectedTotal: '='
   },
   controller,

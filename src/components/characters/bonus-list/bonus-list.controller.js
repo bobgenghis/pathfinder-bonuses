@@ -4,7 +4,7 @@ export default class controller {
     
     Object.assign(this, { $log });
     
-    this.selectedAttackType; //binding
+    this.attackType; //binding
     this.baseAttack; //binding, to trigger onChanges
     this.bonuses = []; //binding
     this.selectedTotal = {}; //binding
@@ -57,7 +57,7 @@ export default class controller {
     var extraAttacks = 0;
 
     angular.forEach(this.bonuses, function(bonus) {
-      if (bonus.selected && (!bonus.type || bonus.type === vm.selectedAttackType)) {
+      if (bonus.selected && (!bonus.type || bonus.type === vm.attackType)) {
         if (bonus.attackMod) {
           bonusAttackMod += bonus.attackMod;
         }
