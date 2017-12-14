@@ -1,5 +1,8 @@
 <div ng-repeat="bonus in $ctrl.bonuses track by $index">
   <div ng-show="!bonus.type || bonus.type === $ctrl.selectedAttackType">
-    <input type="checkbox" ng-model="bonus.selected" ng-change="$ctrl.updateSelection();">{{bonus.name}}: {{$ctrl.getBonus(bonus)}}</input>
+    <label>
+      <input type="checkbox" ng-model="bonus.selected" ng-change="$ctrl.updateSelection();" />
+      {{bonus.name}}: {{$ctrl.getBonus(bonus)}}
+    </label>
   </div>
 </div>

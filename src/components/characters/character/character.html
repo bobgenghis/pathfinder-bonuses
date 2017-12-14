@@ -2,14 +2,20 @@
 
 <div class="bigUpsWrapper" ng-show="$ctrl.bigUps && $ctrl.bigUps.length > 1">
   <div ng-repeat="bigUp in $ctrl.bigUps track by $index">
-    <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp" ng-change="$ctrl.updateBab();">{{bigUp.name}} {{bigUp.desc}}<br>
+    <label>
+      <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp" ng-change="$ctrl.updateBab();">
+      {{bigUp.name}} {{bigUp.desc}}<br>
+    </label>
   </div>
 </div>
 <br />
 
 <div class="attackWrapper">
   <div ng-repeat="attack in $ctrl.attacks track by $index">
-    <input type="radio" ng-model="$ctrl.selectedAttack" ng-value="attack">{{attack.name}} {{$ctrl.getAttack(attack)}}<br>
+    <label>
+      <input type="radio" ng-model="$ctrl.selectedAttack" ng-value="attack">
+      {{attack.name}} {{$ctrl.getAttack(attack)}}
+    </label>
   </div>
 </div>
 <br />

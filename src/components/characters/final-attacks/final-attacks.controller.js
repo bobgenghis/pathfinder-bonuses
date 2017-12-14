@@ -17,7 +17,6 @@ export default class controller {
   }
   
   $onChanges() {
-	this.$log.info('final $onChanges');
     this.baseAttackRange = this.getBaseAttackRange();
     this.totalBonuses = this.getTotalBonuses();
   }
