@@ -89,8 +89,8 @@ export default class controller {
       baseAttack: 6,
 
       attacks: [
-        { name: 'scimitar', type: 'melee', attackMod: 12, damageDice: '1d6', damageMod: 6},
-        { name: 'claw', type: 'melee', attackMod: 11, damageDice: '1d4', damageMod: 5,
+        { name: 'scimitar', type: 'melee', attackMod: 6, damageDice: '1d6', damageMod: 6},
+        { name: 'claw', type: 'melee', attackMod: 5, damageDice: '1d4', damageMod: 5,
           get extraAttacks() {
             return mahmud.optionalBonuses.some(x => x.selected && x.name === 'spell combat')
               ? 2
@@ -118,7 +118,8 @@ export default class controller {
       ],
       conditionalBonuses: [
         { name: 'flanking', type: 'melee', attackMod: 2, selected: false},
-        { name: 'outflank (stack with flanking)', type: 'melee', attackMod: 2, selected: false}
+        { name: 'outflank (stack with flanking)', type: 'melee', attackMod: 2, selected: false},
+        { name: 'all gnolls must die (competence)', attackMod: 2, damageMod: 2, selected: false},
       ]
     };
 
