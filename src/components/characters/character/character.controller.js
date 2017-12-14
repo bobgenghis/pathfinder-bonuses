@@ -62,7 +62,7 @@ export default class controller {
     return this.selectedBigUp && this.selectedBigUp.name === 'soul stone';
   }
 
-  getAttack(attack) {
+  getAttackDesc(attack) {
     var damageDice = (this.selectedBigUp.large && attack.largeDamageDice)
       ? attack.largeDamageDice
       : attack.damageDice;
@@ -75,7 +75,12 @@ export default class controller {
       ? '+' + attack.extraDamage
       : '';
 
-    return this.getAmount(this.baseAttack + attack.attackMod) + ' / ' + damageDice + this.getAmount(damageMod) + extraDamage;
+    var attackDesc = this.getAmount(this.baseAttack + attack.attackMod);
+    if (damageDice && damageDice !== '') {
+      attackDesc += (' / ' + damageDice + this.getAmount(damageMod) + extraDamage);
+    }
+
+    return attackDesc;
   }
 
   

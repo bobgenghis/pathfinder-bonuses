@@ -14,7 +14,7 @@
   <div ng-repeat="attack in $ctrl.attacks track by $index">
     <label>
       <input type="radio" ng-model="$ctrl.selectedAttack" ng-value="attack">
-      {{attack.name}} {{$ctrl.getAttack(attack)}}
+      {{attack.name}} {{$ctrl.getAttackDesc(attack)}}
     </label>
   </div>
 </div>

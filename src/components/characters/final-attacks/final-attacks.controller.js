@@ -57,7 +57,11 @@ export default class controller {
     
     var attackBonusMod = this.totalBonuses.attackMod;
     var selectedAttack = this.selectedAttack;
-    
+
+    if (this.selectedBigUp && this.selectedBigUp.large && selectedAttack.type && selectedAttack.type === 'ranged') {
+      attackBonusMod -= 2;
+    }
+
     if (this.selectedBigUp.attackMod) {
       attackBonusMod += this.selectedBigUp.attackMod;
     }

@@ -43,6 +43,7 @@ export default class controller {
       ],
       conditionalBonuses: [
         { name: 'flanking', type: 'melee', attackMod: 4, selected: true},
+        { name: 'adj to flanked enemy', type: 'melee', attackMod: 2, selected: false},
         { name: 'opp attack', type: 'melee', attackMod: 4, selected: false},
         { name: 'enemy is prone', type: 'melee', attackMod: 4, selected: false},
         { name: 'vs giant', attackMod: 6, damageMod: 4, selected: false},
@@ -75,6 +76,7 @@ export default class controller {
       ],
       conditionalBonuses: [
         { name: 'flanking', type: 'melee', attackMod: 4, selected: true},
+        { name: 'adj and flanking (menacing)', type: 'melee', attackMod: 2, selected: false},
         { name: 'opp attack', type: 'melee', attackMod: 4, selected: false},
         { name: 'enemy is prone', type: 'melee', attackMod: 4, selected: false},
         { name: 'vs giant', attackMod: 4, damageMod: 4, selected: false},
