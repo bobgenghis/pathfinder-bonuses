@@ -22,19 +22,12 @@ export default class controller {
   }
   
   getBaseAttacks() {
+    var vm = this;
     var attackRange = [];
   
     if (!(this.baseAttack && this.selectedAttack && this.selectedAttack.name)) {
       return attackRange;
     }
-
-    var damageDice = (this.selectedBigUp.large && this.selectedAttack.largeDamageDice)
-      ? this.selectedAttack.largeDamageDice
-      : this.selectedAttack.damageDice;
-
-    var damageBaseMod = this.selectedBigUp.large
-      ? this.selectedAttack.largeDamageMod
-      : this.selectedAttack.damageMod;
 
     var extraAttacks = angular.isDefined(this.selectedAttack.extraAttacks)
       ? this.selectedAttack.extraAttacks
@@ -43,51 +36,71 @@ export default class controller {
     extraAttacks += (this.optionalBonuses.extraAttacks
       + this.conditionalBonuses.extraAttacks);
 
-    var firstAttack = {
-      name: this.selectedAttack.name,
-      type: this.selectedAttack.type,
-      attackMod: this.baseAttack + this.selectedAttack.attackMod,
-      damageDice: damageDice,
-      damageMod: damageBaseMod
-    };
+    var firstAttack = this.getAttackAttributes(this.selectedAttack);
+
+    var attackRider;
+    if (this.selectedAttack.rider) {
+      attackRider = vm.getAttackAttributes(this.selectedAttack.rider);
+    }
 
     //push first attack always, plus extras
     for (var i = 0; i < (extraAttacks+1); i++) {
       attackRange.push(firstAttack);
+      if (attackRider && attackRider.name) {
+        attackRange.push(attackRider);
+      }
     }
 
     if (!this.selectedAttack.isNatural) {
       for (var iterativeAttack = (this.baseAttack-5); iterativeAttack > 0; iterativeAttack -= 5) {
         attackRange.push({
-          name: this.selectedAttack.name,
-          type: this.selectedAttack.type,
-          attackMod: iterativeAttack + this.selectedAttack.attackMod,
-          damageDice: damageDice,
-          damageMod: damageBaseMod
+          name: firstAttack.name,
+          type: firstAttack.type,
+          attackMod: firstAttack.attackMod - this.baseAttack + iterativeAttack,
+          damageDice: firstAttack.damageDice,
+          damageMod: firstAttack.damageMod
         });
+
+        if (attackRider && attackRider.name) {
+          attackRange.push({
+            name: attackRider.name,
+            type: attackRider.type,
+            attackMod: attackRider.attackMod - this.baseAttack + iterativeAttack,
+            damageDice: attackRider.damageDice,
+            damageMod: attackRider.damageMod
+        });
+        }
       }
     }
 
-    if (this.selectedAttack.secondaryAttack && this.selectedAttack.secondaryAttack.name) {
-      var secondaryDamageDice = (this.selectedBigUp.large && this.selectedAttack.largeDamageDice)
-        ? this.selectedAttack.secondaryAttack.largeDamageDice
-        : this.selectedAttack.secondaryAttack.damageDice;
-
-      var secondaryDamageBaseMod = this.selectedBigUp.large
-        ? this.selectedAttack.secondaryAttack.largeDamageMod
-        : this.selectedAttack.secondaryAttack.damageMod;
-
-      attackRange.push({
-        name: this.selectedAttack.secondaryAttack.name,
-        type: this.selectedAttack.secondaryAttack.type,
-        attackMod: this.selectedAttack.secondaryAttack.attackMod,
-        damageDice: secondaryDamageDice,
-        damageMod: secondaryDamageBaseMod
+    if (this.selectedAttack.secondaryAttacks && this.selectedAttack.secondaryAttacks.length > 0) {
+      this.selectedAttack.secondaryAttacks.forEach(function(secondaryAttack){
+        attackRange.push(vm.getAttackAttributes(secondaryAttack));
       });
     }
 
     return attackRange;
   };
+
+  getAttackAttributes(attack) {
+    var attackMod = this.baseAttack + attack.attackMod;
+
+    var damageMod = (this.selectedBigUp.large && attack.largeDamageMod)
+      ? attack.largeDamageMod
+      : attack.damageMod;
+
+    var damageDice = (this.selectedBigUp.large && attack.largeDamageDice)
+      ? attack.largeDamageDice
+      : attack.damageDice;
+
+    return {
+      name: attack.name,
+      type: attack.type,
+      attackMod: this.baseAttack + attack.attackMod,
+      damageMod: damageMod,
+      damageDice: damageDice
+    };
+  }
 
   getTotalBonuses() {
     return {

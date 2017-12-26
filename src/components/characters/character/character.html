@@ -4,11 +4,10 @@
   <div ng-repeat="bigUp in $ctrl.bigUps track by $index">
     <label>
       <input type="radio" ng-model="$ctrl.selectedBigUp" ng-value="bigUp" ng-change="$ctrl.updateBab();">
-      {{bigUp.name}} {{bigUp.desc}}<br>
+      {{bigUp.name}} {{bigUp.desc}}
     </label>
   </div>
 </div>
-<br />
 
 <div class="attackWrapper">
   <div ng-repeat="attack in $ctrl.attacks track by $index">
@@ -18,38 +17,43 @@
     </label>
   </div>
 </div>
-<br />
 
 <bonus-list class="optionalWrapper"
   base-attack="$ctrl.baseAttack"
   bonuses="$ctrl.optionalBonuses"
   attack-type="$ctrl.selectedAttack.type"
-  selected-total="$ctrl.optionalTotal" ></bonus-list>
+  selected-total="$ctrl.optionalTotal" >
+</bonus-list>
 
 <bonus-list class="conditionalWrapper"
   base-attack="$ctrl.baseAttack"
   bonuses="$ctrl.conditionalBonuses"
   attack-type="$ctrl.selectedAttack.type"
-  selected-total="$ctrl.conditionalTotal" ></bonus-list>
+  selected-total="$ctrl.conditionalTotal" >
+</bonus-list>
 
-Misc Attack Mod: <input type="number" ng-model="$ctrl.miscBonus.attackMod" ng-change="$ctrl.updateMisc();"/>
-<br />
-Misc Damage Mod: <input type="number" ng-model="$ctrl.miscBonus.damageMod" ng-change="$ctrl.updateMisc();"/>
-<br />
-Misc Damage Dice: <input type="text" ng-model="$ctrl.miscBonus.damageDice" ng-change="$ctrl.updateMisc();"/>
-<br />
+<div class="miscWrapper">
+  <label class="block">
+    Misc Attack Mod:
+    <input type="number" ng-model="$ctrl.miscBonus.attackMod" ng-change="$ctrl.updateMisc();"/>
+  </label>
 
-<br />
-<br />
+  <label class="block">
+    Misc Damage Mod:
+    <input type="number" ng-model="$ctrl.miscBonus.damageMod" ng-change="$ctrl.updateMisc();"/>
+  </label>
+
+  <label class="block">
+    Misc Damage Dice:
+    <input type="number" ng-model="$ctrl.miscBonus.damageDice" ng-change="$ctrl.updateMisc();"/>
+  </label>
+</div>
 
 <final-attacks base-attack="$ctrl.baseAttack"
   selected-attack="$ctrl.selectedAttack"
   selected-big-up="$ctrl.selectedBigUp"
   optional-bonuses="$ctrl.optionalTotal"
   conditional-bonuses="$ctrl.conditionalTotal"
-  misc-bonuses="$ctrl.miscTotal"></final-attacks>
-
-</div>
-
-
+  misc-bonuses="$ctrl.miscTotal">
+</final-attacks>
 

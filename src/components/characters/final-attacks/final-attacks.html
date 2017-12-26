@@ -1,7 +1,4 @@
-<div ng-repeat="baseAttack in $ctrl.baseAttacks track by $index">
+<div class="base-attack" ng-repeat="baseAttack in $ctrl.baseAttacks track by $index">
   <span>{{$ctrl.getFinalAttack(baseAttack)}}</span>
-  <br />
   <span>{{$ctrl.getFinalDamage(baseAttack)}}</span>
-  <br />
-  <br />
 </div>

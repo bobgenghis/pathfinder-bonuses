@@ -4,10 +4,12 @@ character {
   vertical-align: top;
 
   .bigUpsWrapper {
+    margin-bottom: 20px;
 	min-height: 60px;
   }
 
   .attackWrapper {
+    margin-bottom: 20px;
     min-height: 60px;
   }
 
@@ -17,5 +19,13 @@ character {
 
   .conditionalWrapper {
     min-height: 120px;
+  }
+
+  .miscWrapper {
+    margin-bottom: 20px;
+
+    label {
+	  display: block;
+	}
   }
 }
