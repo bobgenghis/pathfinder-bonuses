@@ -54,6 +54,7 @@ export default class controller {
     var bonusAttackMod = 0;
     var bonusDamageMod = 0;
     var bonusDamageDice = '';
+    var bonusDamageRoll = 0;
     var extraAttacks = 0;
 
     angular.forEach(this.bonuses, function(bonus) {
@@ -65,7 +66,10 @@ export default class controller {
           bonusDamageMod += bonus.damageMod;
         }
         if (bonus.damageDice) {
-          bonusDamageDice += ('+' + bonus.damageDice);
+          bonusDamageDice += bonus.damageDice;
+        }
+        if (bonus.damageRoll) {
+          bonusDamageRoll += bonus.damageRoll;
         }
         if (bonus.extraAttacks) {
           extraAttacks += bonus.extraAttacks;
@@ -76,6 +80,7 @@ export default class controller {
       attackMod: bonusAttackMod,
       damageMod: bonusDamageMod,
       damageDice: bonusDamageDice,
+      damageRoll: bonusDamageRoll,
       extraAttacks: extraAttacks
     };
   }

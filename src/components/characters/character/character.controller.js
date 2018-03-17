@@ -53,9 +53,6 @@ export default class controller {
   updateMisc() {
     //need to copy to trigger onChange for final
     this.miscTotal = angular.copy(this.miscBonus);
-    if (this.miscTotal.damageDice && this.miscTotal.damageDice !== '') {
-      this.miscTotal.damageDice = ('+' + this.miscTotal.damageDice);
-    }
   }
 
   isSoulStone() {
