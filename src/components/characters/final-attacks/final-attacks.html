@@ -8,9 +8,12 @@
   <input type="number" ng-model="$ctrl.targetAc" ng-change="$ctrl.updateTargetAc();"/>
 </label>
 
-<div ng-repeat="finalAverage in $ctrl.finalAverages track by $index">
-  <span >{{finalAverage.averageHit | number: 2}}*{{(finalAverage.averageDamage | number: 2)}}*(1+{{finalAverage.crit | number: 2}}) =
-  {{finalAverage.averageTotal | number: 2}}</span>
+<div class="final-wrapper">
+  <div ng-repeat="finalAverage in $ctrl.finalAverages track by $index">
+    <span >{{finalAverage.averageHit | number: 2}}*{{(finalAverage.averageDamage | number: 2)}}*(1+{{finalAverage.crit | number: 2}}) =
+    {{finalAverage.averageTotal | number: 2}}</span>
+  </div>
 </div>
+
 
 <span>Total: {{$ctrl.finalAverage | number: 2}} </span>

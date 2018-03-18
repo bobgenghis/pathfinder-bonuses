@@ -17,6 +17,10 @@ export default class controller {
 
     this.targetAc = 32;
   }
+
+  $onInit() {
+	 this.targetAc = (this.baseAttack + 20);
+  }
   
   $onChanges() {
     this.finalAttacks = this.getFinalAttacks();
@@ -56,26 +60,14 @@ export default class controller {
 
     if (!this.selectedAttack.isNatural) {
       for (var iterativeAttack = (this.baseAttack-5); iterativeAttack > 0; iterativeAttack -= 5) {
-        attackRange.push({
-          name: firstAttack.name,
-          type: firstAttack.type,
-          attackMod: firstAttack.attackMod - this.baseAttack + iterativeAttack,
-          damageDice: firstAttack.damageDice,
-          damageMod: firstAttack.damageMod,
-          damageRoll: firstAttack.damageRoll,
-          crit: firstAttack.crit
-        });
+        var newAttack = angular.copy(firstAttack);
+        newAttack.attackMod += (iterativeAttack - this.baseAttack);
+        attackRange.push(newAttack);
 
         if (attackRider && attackRider.name) {
-          attackRange.push({
-            name: attackRider.name,
-            type: attackRider.type,
-            attackMod: attackRider.attackMod - this.baseAttack + iterativeAttack,
-            damageDice: attackRider.damageDice,
-            damageMod: attackRider.damageMod,
-            damageRoll: attackRider.damageRoll,
-            crit: attackRider.crit
-          });
+          var newRider = angular.copy(attackRider);
+          newRider.attackMod += (iterativeAttack - this.baseAttack);
+          attackRange.push(newRider);
         }
       }
     }
@@ -123,7 +115,7 @@ export default class controller {
       attackMod: this.optionalBonuses.attackMod + this.conditionalBonuses.attackMod + this.miscBonuses.attackMod,
       damageMod: this.optionalBonuses.damageMod + this.conditionalBonuses.damageMod + this.miscBonuses.damageMod,
       damageDice: this.optionalBonuses.damageDice + this.conditionalBonuses.damageDice + this.miscBonuses.damageDice,
-      damageRoll: this.optionalBonuses.damageRoll + this.conditionalBonuses.damageRoll,// + this.miscBonuses.damageRoll,
+      damageRoll: this.optionalBonuses.damageRoll + this.conditionalBonuses.damageRoll,
       extraAttacks: this.optionalBonuses.extraAttacks + this.conditionalBonuses.extraAttacks
     };
 
@@ -145,6 +137,7 @@ export default class controller {
         damageDice: baseAttack.damageDice,
         damageMod: baseAttack.damageMod + totalBonuses.damageMod,
         damageRoll: baseAttack.damageRoll + totalBonuses.damageRoll,
+        bonusDamage: totalBonuses.damageDice,
         crit: baseAttack.crit
       });
 
@@ -165,7 +158,7 @@ export default class controller {
       return '';
     }
 
-    var bonusDamage = (finalAttack.bonusDamage && finalAttack.bonusDamag !== '')
+    var bonusDamage = (finalAttack.bonusDamage && finalAttack.bonusDamage !== '')
         ? ('+' + finalAttack.bonusDamage)
         : '';
 
@@ -176,6 +169,10 @@ export default class controller {
     var finalAverages = [];
     for (var finalAttackIndex in this.finalAttacks) {
       var finalAttack = this.finalAttacks[finalAttackIndex];
+      if (!finalAttack.damageRoll || finalAttack.damageRoll == 0) {
+        continue;
+      }
+
       var averageHit = this.getFinalAverageHit(finalAttack);
       var averageDamage = finalAttack.damageRoll+finalAttack.damageMod;
       var miscDamage = finalAttack.bonusDamage;

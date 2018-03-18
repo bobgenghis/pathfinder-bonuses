@@ -56,7 +56,7 @@ export default class controller {
       name: 'Bilo',
       baseAttack: 8,
       attacks: [
-        { name: 'bite', type: 'melee', attackMod: 7, damageDice: '2d6', damageMod: 13, largeDamageDice: '3d6', largeDamageMod: 15,
+        { name: 'bite', type: 'melee', attackMod: 7, damageDice: '2d6', damageMod: 13, damageRoll: 7, largeDamageDice: '3d6', largeDamageMod: 15,
           isNatural: true, crit: 19, rider: { name: 'trip', type: 'melee', attackMod: 20, damageDice: '', damageMod: 0, perAttack: true}
         }
       ],
