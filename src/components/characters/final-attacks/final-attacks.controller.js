@@ -115,7 +115,7 @@ export default class controller {
       attackMod: this.optionalBonuses.attackMod + this.conditionalBonuses.attackMod + this.miscBonuses.attackMod,
       damageMod: this.optionalBonuses.damageMod + this.conditionalBonuses.damageMod + this.miscBonuses.damageMod,
       damageDice: this.optionalBonuses.damageDice + this.conditionalBonuses.damageDice + this.miscBonuses.damageDice,
-      damageRoll: this.optionalBonuses.damageRoll + this.conditionalBonuses.damageRoll,
+      bonusRoll: this.optionalBonuses.damageRoll + this.conditionalBonuses.damageRoll,
       extraAttacks: this.optionalBonuses.extraAttacks + this.conditionalBonuses.extraAttacks
     };
 
@@ -136,8 +136,9 @@ export default class controller {
         attackMod: baseAttack.attackMod + attackBonusMod,
         damageDice: baseAttack.damageDice,
         damageMod: baseAttack.damageMod + totalBonuses.damageMod,
-        damageRoll: baseAttack.damageRoll + totalBonuses.damageRoll,
+        damageRoll: baseAttack.damageRoll,
         bonusDamage: totalBonuses.damageDice,
+        bonusRoll: totalBonuses.bonusRoll,
         crit: baseAttack.crit
       });
 
@@ -175,7 +176,7 @@ export default class controller {
 
       var averageHit = this.getFinalAverageHit(finalAttack);
       var averageDamage = finalAttack.damageRoll+finalAttack.damageMod;
-      var miscDamage = finalAttack.bonusDamage;
+      var bonusDamage = finalAttack.bonusRoll;
       var critMod = finalAttack.crit && finalAttack.crit < 20
         ? finalAttack.crit
         : 20;
@@ -184,8 +185,9 @@ export default class controller {
       finalAverages.push({
         averageHit: averageHit,
         averageDamage: averageDamage,
+        bonusDamage: bonusDamage,
         crit: crit,
-        averageTotal: averageHit*averageDamage*(1+crit)
+        averageTotal: averageHit*(bonusDamage+averageDamage*(1+crit))
       });
     }
 

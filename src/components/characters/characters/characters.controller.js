@@ -8,20 +8,23 @@ export default class controller {
 
     var boendal = {
       name: 'Boendal',
-      baseAttack: 12,
+      baseAttack: 13,
       attacks: [
-        { name: 'greatsword', type: 'melee', attackMod: 9, damageDice: '3d6', damageMod: 13, damageRoll: 10.5, largeDamageDice: '4d6', largeDamageRoll: 14, largeDamageMod: 16, crit: 17},
+        { name: 'greatsword', type: 'melee', attackMod: 8, damageDice: '3d6', damageMod: 12, damageRoll: 10.5, largeDamageDice: '4d6', largeDamageRoll: 14, largeDamageMod: 14, crit: 17},
         { name: 'longspear', type: 'melee', attackMod: 7, damageDice: '2d6', damageMod: 11, damageRoll: 7, largeDamageDice: '3d6', largeDamageRoll: 10.5, largeDamageMod: 13},
         { name: 'longbow', type: 'ranged', attackMod: 3, damageDice: '1d8', damageMod: 8, largeDamageMod: 9, damageRoll: 4.5}
       ],
       bigUps: [
         { name: 'none', large: false},
-        { name: 'enlarge', large: true},
-        { name: 'soul stone', desc:'+1 BAB', large: true},
+        { name: 'enlarge', large: true}
       ],
       optionalBonuses: [
         { name: 'haste', attackMod: 1, extraAttacks: 1, selected: false},
-        { name: 'bane', attackMod: 2, damageMod: 2, damageDice: '2d6', selected: false},
+        //note melee rage bonus includes enh bonus from furious greatsword
+        { name: 'rage', attackMod: 4, damageMod: 5, type: 'melee', selected: false},
+        { name: 'rage', attackMod: 2, damageMod: 2, type: 'ranged', selected: false},
+        { name: 'bane', attackMod: 2, damageMod: 2, damageDice: '2d6', damageRoll: 7, selected: false},
+        //{ name: 'impact', damageDice: '2d6', damageRoll: 7, selected: false},
         { name: 'power attack', type: 'melee',
           get attackMod() {
             return vm.getPowerAttackMod(boendal.baseAttack);
@@ -31,7 +34,7 @@ export default class controller {
           },
           selected: true
         },
-        { name: 'deadly aim', type: 'ranged',
+        /*{ name: 'deadly aim', type: 'ranged',
           get attackMod() {
             return vm.getPowerAttackMod(boendal.baseAttack);
           },
@@ -39,8 +42,8 @@ export default class controller {
             return -2*(this.attackMod);
           },
           selected: false
-        },
-        { name: 'alcoholic morale', attackMod: 2, damageMod: 2, selected: false}
+        },*/
+        { name: 'alcoholic morale', attackMod: 2, selected: false}
       ],
       conditionalBonuses: [
         { name: 'flanking', type: 'melee', attackMod: 4, selected: true},
@@ -57,7 +60,8 @@ export default class controller {
       baseAttack: 8,
       attacks: [
         { name: 'bite', type: 'melee', attackMod: 7, damageDice: '2d6', damageMod: 13, damageRoll: 7, largeDamageDice: '3d6', largeDamageMod: 15,
-          isNatural: true, crit: 19, rider: { name: 'trip', type: 'melee', attackMod: 20, damageDice: '', damageMod: 0, perAttack: true}
+          isNatural: true, crit: 19,
+		  rider: { name: 'trip', type: 'melee', attackMod: 20, damageDice: '', damageMod: 0, perAttack: true}
         }
       ],
       bigUps: [
@@ -141,7 +145,7 @@ export default class controller {
       optionalBonuses: [
         { name: 'haste', attackMod: 1, extraAttacks: 1, selected: false},
         { name: 'frostbite', damageDice: '1d6+10', damageRoll: 13.5, selected: false},
-        { name: 'power attack', attackMod: -3, damageMod: 6, selected: false},
+//        { name: 'power attack', attackMod: -3, damageMod: 6, selected: false},
         { name: 'spell combat', attackMod: -2, selected: true},
         { name: '+spell strike', extraAttacks: 1, selected: true},
         { name: 'arcane accuracy', attackMod: 5, selected: false},

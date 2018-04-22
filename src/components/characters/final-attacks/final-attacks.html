@@ -10,8 +10,8 @@
 
 <div class="final-wrapper">
   <div ng-repeat="finalAverage in $ctrl.finalAverages track by $index">
-    <span >{{finalAverage.averageHit | number: 2}}*{{(finalAverage.averageDamage | number: 2)}}*(1+{{finalAverage.crit | number: 2}}) =
-    {{finalAverage.averageTotal | number: 2}}</span>
+    {{finalAverage.averageHit | number: 2}}*(<span ng-if="finalAverage.bonusDamage">{{finalAverage.bonusDamage | number: 2}}+</span>{{(finalAverage.averageDamage | number: 2)}}*(1+{{finalAverage.crit | number: 2}})) =
+    {{finalAverage.averageTotal | number: 2}}
   </div>
 </div>
 
