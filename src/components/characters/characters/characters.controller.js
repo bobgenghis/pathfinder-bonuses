@@ -8,7 +8,7 @@ export default class controller {
 
     var boendal = {
       name: 'Boendal',
-      baseAttack: 13,
+      baseAttack: 14,
       attacks: [
         { name: 'greatsword', type: 'melee', attackMod: 8, damageDice: '3d6', damageMod: 12, damageRoll: 10.5, largeDamageDice: '4d6', largeDamageRoll: 14, largeDamageMod: 14, crit: 17},
         { name: 'longspear', type: 'melee', attackMod: 7, damageDice: '2d6', damageMod: 11, damageRoll: 7, largeDamageDice: '3d6', largeDamageRoll: 10.5, largeDamageMod: 13},
@@ -51,17 +51,17 @@ export default class controller {
         { name: 'vs large/huge', attackMod: 1, damageMod: 1, selected: true},
         { name: 'vs gargantuan/colossal', attackMod: 2, damageMod: 2, selected: false},
         { name: 'vs giant', attackMod: 6, damageMod: 4, selected: false},
-        { name: 'vs orc', attackMod: 2, damageMod: 2, selected: false}
+        { name: 'vs dragon', attackMod: 2, damageMod: 2, selected: false}
       ]
     };
 
     var bilo = {
       name: 'Bilo',
-      baseAttack: 8,
+      baseAttack: 9,
       attacks: [
-        { name: 'bite', type: 'melee', attackMod: 7, damageDice: '2d6', damageMod: 13, damageRoll: 7, largeDamageDice: '3d6', largeDamageMod: 15,
+        { name: 'bite', type: 'melee', attackMod: 8, damageDice: '2d6', damageMod: 15, damageRoll: 7, largeDamageDice: '3d6', largeDamageMod: 15,
           isNatural: true, crit: 19,
-		  rider: { name: 'trip', type: 'melee', attackMod: 20, damageDice: '', damageMod: 0, perAttack: true}
+		  rider: { name: 'trip', type: 'melee', attackMod: 22, damageDice: '', damageMod: 0, perAttack: true}
         }
       ],
       bigUps: [
@@ -83,13 +83,14 @@ export default class controller {
         { name: 'flanking', type: 'melee', attackMod: 4, selected: true},
         { name: 'opp attack', type: 'melee', attackMod: 4, selected: false},
         { name: 'vs giant', attackMod: 4, damageMod: 4, selected: false},
-        { name: 'vs orc', attackMod: 2, damageMod: 2, selected: false}
+        { name: 'vs dragon', attackMod: 2, damageMod: 2, selected: false},
+        { name: 'tripped w/in 1 round', attackMod: 2, damageMod: 2, selected: false}
       ]
     };
 
     var mahmud = {
       name: 'Mahmud',
-      baseAttack: 7,
+      baseAttack: 8,
 
       attacks: [
         { name: 'scimitar', type: 'melee', attackMod: 6, damageDice: '1d6', damageMod: 6, damageRoll: 3.5, crit: 15},
