@@ -53,18 +53,15 @@ export default class controller {
 
     var hasSeperateAttacks = this.hasSeperateAttacks();
 
-    //push first attack always, plus extras
-	attackRange.push(firstAttack);
-	if (!hasSeperateAttacks) {
-	  for (var i = 0; i < (extraAttacks); i++) {
-        attackRange.push(firstAttack);
-        if (attackRider && attackRider.name) {
-          attackRange.push(attackRider);
-        }
+    for (var i = 0; i < (extraAttacks+1); i++) {
+      attackRange.push(firstAttack);
+      if (attackRider && attackRider.name) {
+        attackRange.push(attackRider);
       }
-	} else if (attackRange.length > 0) {
-		attackRange[0].attackMod += this.seperateAttack.attackMod;
-	}
+      if (hasSeperateAttacks) {
+        break;
+      }
+    }
 
     if (!this.selectedAttack.isNatural && !hasSeperateAttacks) {
       for (var iterativeAttack = (this.baseAttack-5); iterativeAttack > 0; iterativeAttack -= 5) {
@@ -90,11 +87,11 @@ export default class controller {
   };
 
   hasSeperateAttacks() {
-	if (!this.seperateAttack) {
-	  return false;
-	}
+    if (!this.seperateAttack) {
+      return false;
+    }
 
-	return this.seperateAttack.name !== 'none';
+    return this.seperateAttack.name !== 'none';
   };
 
   getAttackAttributes(attack) {
