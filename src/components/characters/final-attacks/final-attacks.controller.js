@@ -59,6 +59,11 @@ export default class controller {
         attackRange.push(attackRider);
       }
       if (hasSeperateAttacks) {
+        if (vm.seperateAttack.attackMod) {
+           attackRange.forEach(function(attack) {
+             attack.attackMod += vm.seperateAttack.attackMod;
+           });
+        };
         break;
       }
     }
