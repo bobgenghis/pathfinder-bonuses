@@ -58,8 +58,9 @@ export default class controller {
 		  rider: { name: 'trip', type: 'melee', attackMod: 22, damageDice: '', damageMod: 0, perAttack: true}
         }
       ],
-      bigUps: [
-        { name: 'none', large: false}
+      seperateAttacks: [
+        { name: 'none', selected: true},
+        { name: 'opp attack', type: 'melee', attackMod: 4, selected: false},
       ],
       optionalBonuses: [
         { name: 'haste', attackMod: 1, extraAttacks: 1, selected: false},
@@ -75,7 +76,6 @@ export default class controller {
       ],
       conditionalBonuses: [
         { name: 'flanking', type: 'melee', attackMod: 4, selected: true},
-        { name: 'opp attack', type: 'melee', attackMod: 4, selected: false},
         { name: 'vs giant', attackMod: 4, damageMod: 4, selected: false},
         { name: 'vs dragon', attackMod: 2, damageMod: 2, selected: false},
         { name: 'tripped w/in 1 round', attackMod: 2, damageMod: 2, selected: false}
