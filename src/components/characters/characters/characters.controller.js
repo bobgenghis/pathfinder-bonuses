@@ -18,6 +18,10 @@ export default class controller {
         { name: 'none', large: false},
         { name: 'enlarge', large: true}
       ],
+      seperateAttacks: [
+        { name: 'none', selected: true},
+        { name: 'opp attack', type: 'melee', attackMod: 4, selected: false},
+      ],
       optionalBonuses: [
         { name: 'haste', attackMod: 1, extraAttacks: 1, selected: false},
         //note melee rage bonus includes enh bonus from furious greatsword
@@ -34,20 +38,10 @@ export default class controller {
           },
           selected: true
         },
-        /*{ name: 'deadly aim', type: 'ranged',
-          get attackMod() {
-            return vm.getPowerAttackMod(boendal.baseAttack);
-          },
-          get damageMod() {
-            return -2*(this.attackMod);
-          },
-          selected: false
-        },*/
         { name: 'alcoholic morale', attackMod: 2, selected: false}
       ],
       conditionalBonuses: [
         { name: 'flanking', type: 'melee', attackMod: 4, selected: true},
-        { name: 'opp attack (circumstance)', type: 'melee', attackMod: 4, selected: false},
         { name: 'vs large/huge', attackMod: 1, damageMod: 1, selected: true},
         { name: 'vs gargantuan/colossal', attackMod: 2, damageMod: 2, selected: false},
         { name: 'vs giant', attackMod: 6, damageMod: 4, selected: false},

@@ -6,6 +6,7 @@ export default {
     baseAttack: '<',
     selectedAttack: '<',
     selectedBigUp: '<',
+    seperateAttack: '<',
     optionalBonuses: '<',
     conditionalBonuses: '<',
     miscBonuses: '<',

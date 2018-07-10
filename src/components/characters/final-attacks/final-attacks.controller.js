@@ -7,6 +7,7 @@ export default class controller {
     this.baseAttack; //binding, expected int
     this.selectedAttack; //binding, expected int
     this.selectedBigUp = {}; //binding
+    this.seperateAttack; //binding
     
     this.optionalBonuses = []; //binding
     this.conditionalBonuses = []; //binding
@@ -50,15 +51,22 @@ export default class controller {
       attackRider = vm.getAttackAttributes(this.selectedAttack.rider);
     }
 
-    //push first attack always, plus extras
-    for (var i = 0; i < (extraAttacks+1); i++) {
-      attackRange.push(firstAttack);
-      if (attackRider && attackRider.name) {
-        attackRange.push(attackRider);
-      }
-    }
+    var hasSeperateAttacks = this.hasSeperateAttacks();
 
-    if (!this.selectedAttack.isNatural) {
+    //push first attack always, plus extras
+	attackRange.push(firstAttack);
+	if (!hasSeperateAttacks) {
+	  for (var i = 0; i < (extraAttacks); i++) {
+        attackRange.push(firstAttack);
+        if (attackRider && attackRider.name) {
+          attackRange.push(attackRider);
+        }
+      }
+	} else if (attackRange.length > 0) {
+		attackRange[0].attackMod += this.seperateAttack.attackMod;
+	}
+
+    if (!this.selectedAttack.isNatural && !hasSeperateAttacks) {
       for (var iterativeAttack = (this.baseAttack-5); iterativeAttack > 0; iterativeAttack -= 5) {
         var newAttack = angular.copy(firstAttack);
         newAttack.attackMod += (iterativeAttack - this.baseAttack);
@@ -79,6 +87,14 @@ export default class controller {
     }
 
     return attackRange;
+  };
+
+  hasSeperateAttacks() {
+	if (!this.seperateAttack) {
+	  return false;
+	}
+
+	return this.seperateAttack.name !== 'none';
   };
 
   getAttackAttributes(attack) {
@@ -131,8 +147,13 @@ export default class controller {
         attackBonusMod += this.selectedBigUp.attackMod;
       }
 
+      var name = baseAttack.name;
+      if (this.hasSeperateAttacks()) {
+        name = name + ' (' + this.seperateAttack.name + ')';
+      }
+
       finalAttacks.push({
-        name: baseAttack.name,
+        name: name,
         attackMod: baseAttack.attackMod + attackBonusMod,
         damageDice: baseAttack.damageDice,
         damageMod: baseAttack.damageMod + totalBonuses.damageMod,

@@ -8,12 +8,14 @@ export default class controller {
     this.baseAttack; // binding, note can change based on selections
     this.attacks = []; //binding
     this.bigUps = []; //binding
+	this.seperateAttacks = []; //binding
     this.optionalBonuses = []; //binding
     this.conditionalBonuses = []; //binding
 
     this.initialBaseAttack; //since the baseAttack can change based on powers. setup in init.
 
     this.selectedAttack = {};
+	this.seperateAttack = {};
     this.selectedBigUp = {};
     this.optionalTotal = {};
     this.conditionalTotal = {};
@@ -39,6 +41,10 @@ export default class controller {
 
     if (this.bigUps && this.bigUps.length > 0) {
       this.selectedBigUp = this.bigUps[0];
+    }
+
+    if (this.seperateAttacks && this.seperateAttacks.length > 0) {
+      this.seperateAttack = this.seperateAttacks[0];
     }
   }
 
@@ -78,6 +84,10 @@ export default class controller {
     }
 
     return attackDesc;
+  }
+
+  getSeperateAttackDesc(attack) {
+    return this.getAmount(attack.attackMod);
   }
 
   

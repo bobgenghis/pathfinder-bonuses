@@ -7,6 +7,8 @@ export default {
     baseAttack: '=',
     attacks: '<',
     bigUps: '<',
+    seperateAttacks: '<',
+    seperateAttack: '<',
     optionalBonuses: '<',
     conditionalBonuses: '<'
   },

@@ -18,6 +18,15 @@
   </div>
 </div>
 
+<div class="seperateAttackWrapper">
+  <div ng-repeat="attack in $ctrl.seperateAttacks track by $index">
+    <label>
+      <input type="radio" ng-model="$ctrl.seperateAttack" ng-value="attack">
+      {{attack.name}} {{$ctrl.getSeperateAttackDesc(attack)}}
+    </label>
+  </div>
+</div>
+
 <bonus-list class="optionalWrapper"
   base-attack="$ctrl.baseAttack"
   bonuses="$ctrl.optionalBonuses"
@@ -53,6 +62,7 @@
   selected-attack="$ctrl.selectedAttack"
   selected-big-up="$ctrl.selectedBigUp"
   optional-bonuses="$ctrl.optionalTotal"
+  seperate-attack="$ctrl.seperateAttack"
   conditional-bonuses="$ctrl.conditionalTotal"
   misc-bonuses="$ctrl.miscTotal">
 </final-attacks>
