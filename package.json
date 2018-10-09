@@ -47,7 +47,8 @@
     "gutil": "1.6.4",
     "postcss-sass": "0.3.3",
     "pump": "1.0.2",
-    "stylelint-config-recommended": "1.0.0",
+    "stylelint": "^9.0.0",
+    "stylelint-config-recommended": "2.1.0",
     "through2": "2.0.3",
     "webpack": "3.4.1",
     "webpack-stream": "3.2.0"
