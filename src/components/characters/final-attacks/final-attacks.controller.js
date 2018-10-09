@@ -183,7 +183,7 @@ export default class controller {
     }
 
     var bonusDamage = (finalAttack.bonusDamage && finalAttack.bonusDamage !== '')
-        ? ('+' + finalAttack.bonusDamage)
+        ? finalAttack.bonusDamage
         : '';
 
     return 'damage: [[' + finalAttack.damageDice + this.getAmount(finalAttack.damageMod) + bonusDamage + ']]';

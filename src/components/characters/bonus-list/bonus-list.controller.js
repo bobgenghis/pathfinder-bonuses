@@ -66,7 +66,7 @@ export default class controller {
           bonusDamageMod += bonus.damageMod;
         }
         if (bonus.damageDice) {
-          bonusDamageDice += bonus.damageDice;
+          bonusDamageDice += ('+' + bonus.damageDice);
         }
         if (bonus.damageRoll) {
           bonusDamageRoll += bonus.damageRoll;
