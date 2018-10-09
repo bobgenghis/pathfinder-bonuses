@@ -84,7 +84,7 @@ export default class controller {
 
     var mahmud = {
       name: 'Mahmud',
-      baseAttack: 8,
+      baseAttack: 9,
 
       attacks: [
         { name: 'scimitar', type: 'melee', attackMod: 6, damageDice: '1d6', damageMod: 6, damageRoll: 3.5, crit: 15},
@@ -139,12 +139,13 @@ export default class controller {
       ],
       optionalBonuses: [
         { name: 'haste', attackMod: 1, extraAttacks: 1, selected: false},
-        { name: 'frostbite', damageDice: '1d6+10', damageRoll: 13.5, selected: false},
+        { name: 'luck', attackMod: 1,selected: true},
+        { name: 'bane', attackMod: 2, damageMod: 2, damageDice: '2d6', damageRoll: 7, selected: false},
+        { name: 'frostbite', damageDice: '1d6+12', damageRoll: 15.5, selected: false},
 //        { name: 'power attack', attackMod: -3, damageMod: 6, selected: false},
         { name: 'spell combat', attackMod: -2, selected: true},
         { name: '+spell strike', extraAttacks: 1, selected: true},
         { name: 'arcane accuracy', attackMod: 5, selected: false},
-        { name: 'concealment', attackMod: 2, damageMod: 2, selected: false}
       ],
       conditionalBonuses: [
         { name: 'flanking', type: 'melee', attackMod: 2, selected: false},
